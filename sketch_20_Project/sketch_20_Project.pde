@@ -9,23 +9,26 @@ color elementColor = #123ABC;
 color background = #000000;
 int tabWidth = 50;
 int xL, yL, zL, tL = 0;
-ArrayList<Object> = arrayList1D;
-ArrayList<ArrayList<Object>> = arrayList2D;
-ArrayList<ArrayList<ArrayList<Object>>> + arrayList3D;
-ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> + arrayList4D;
 
-xL = array1D.length();
-yL = array2D[0].length();
-zL = array3D[0][0].length();
-
+ArrayList<Object> arrayList1D = new ArrayList<Object>();
+ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
+ArrayList<ArrayList<ArrayList<Object>>> arrayList3D = new ArrayList<ArrayList<ArrayList<Object>>>();
+ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<ArrayList<ArrayList<ArrayList<Object>>>>();
 
 void setup() {
   size(600, 400, P3D);
   noStroke();
   background(0);
   fill(elementColor);
+  initLists();
   cp5 = new ControlP5(this);
   cam = new PeasyCam(this, 100);
+  cp5.addDropdownList("Array Type")
+  .addItems(new String[] {
+    "String", "int", "double", "boolean"
+  }
+  )
+    ;
   cp5.tab("default").remove();
   cp5.addTab("1D Array")
     .setWidth(tabWidth)
@@ -45,11 +48,15 @@ void setup() {
 }
 
 void draw() {
+  xL = arrayList1D.size();
+  yL = arrayList2D.get(0).size();
+  zL = arrayList3D.get(0).get(0).size();
   switch(mode) {
   case 0:
     hint(DISABLE_DEPTH_TEST);
     cam.beginHUD();
     //1D Array
+
     cam.endHUD(); 
     hint(ENABLE_DEPTH_TEST); 
     break; 
@@ -69,6 +76,7 @@ void draw() {
     gui3D(); 
     break;
   }
+  gui3D();
 }
 
 void gui3D() {
@@ -77,5 +85,19 @@ void gui3D() {
   cp5.draw(); 
   cam.endHUD(); 
   hint(ENABLE_DEPTH_TEST);
+}
+
+void initLists() {
+  ArrayList<Object> temp1DArrayList = new ArrayList<Object>();
+  ArrayList<ArrayList<Object>> temp2DArrayList = new ArrayList<ArrayList<Object>>();
+  ArrayList<ArrayList<ArrayList<Object>>> temp3DArrayList = new ArrayList<ArrayList<ArrayList<Object>>>();
+  temp2DArrayList.add(temp1DArrayList);
+  temp3DArrayList.add(temp2DArrayList);
+  arrayList2D.add(temp1DArrayList);
+  arrayList3D.add(temp2DArrayList);
+  arrayList4D.add(temp3DArrayList);
+  temp1DArrayList = null;
+  temp2DArrayList = null;
+  temp3DArrayList = null;
 }
 
