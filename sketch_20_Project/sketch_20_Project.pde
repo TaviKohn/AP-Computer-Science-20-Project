@@ -23,27 +23,35 @@ void setup() {
   initLists();
   cp5 = new ControlP5(this);
   cam = new PeasyCam(this, 100);
-  cp5.addDropdownList("Array Type")
-  .addItems(new String[] {
-    "String", "int", "double", "boolean"
-  }
-  )
-    ;
+  draw();
+  DropdownList arrayTypeDropdown = cp5.addDropdownList("Array Type");
+  arrayTypeDropdown.setPosition(100, 100);
+  arrayTypeDropdown.setItemHeight(20);
+  arrayTypeDropdown.setBarHeight(15);
+  arrayTypeDropdown.captionLabel().style().marginTop = 3;
+  arrayTypeDropdown.captionLabel().style().marginLeft = 3;
+  arrayTypeDropdown.valueLabel().style().marginTop = 3;
+  arrayTypeDropdown.addItem("String", 0);
+  arrayTypeDropdown.addItem("int", 1);
+  arrayTypeDropdown.addItem("Double", 2);
+  arrayTypeDropdown.addItem("boolean", 3);
+
   cp5.tab("default").remove();
-  cp5.addTab("1D Array")
-    .setWidth(tabWidth)
-      .bringToFront()
-        .activateEvent(true);
-  ;
-  cp5.addTab("2D Array")
-    .setWidth(tabWidth)
-      ;
-  cp5.addTab("3D Array")
-    .setWidth(tabWidth)
-      ;
-  cp5.addTab("4D Array?")
-    .setWidth(tabWidth)
-      ;
+
+  Tab ArrayTab1D = cp5.addTab("1D Array");
+  ArrayTab1D.setWidth(tabWidth);
+  ArrayTab1D.bringToFront();
+  ArrayTab1D.activateEvent(true);
+
+  Tab ArrayTab2D = cp5.addTab("2D Array");
+  ArrayTab2D.setWidth(tabWidth);
+
+  Tab ArrayTab3D = cp5.addTab("3D Array");
+  ArrayTab3D.setWidth(tabWidth);
+
+  Tab ArrayTab4D = cp5.addTab("4D Array?");
+  ArrayTab4D.setWidth(tabWidth);
+
   cp5.setAutoDraw(false);
 }
 
@@ -56,7 +64,6 @@ void draw() {
     hint(DISABLE_DEPTH_TEST);
     cam.beginHUD();
     //1D Array
-
     cam.endHUD(); 
     hint(ENABLE_DEPTH_TEST); 
     break; 
