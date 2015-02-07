@@ -9,6 +9,12 @@ color elementColor = #123ABC;
 color background = #000000;
 int tabWidth = 50;
 int xL, yL, zL, tL = 0;
+Group settings;
+Tab arrayTab1D;
+Tab arrayTab2D;
+Tab arrayTab3D;
+Tab arrayTab4D;
+DropdownList arrayTypeDropdown;
 
 ArrayList<Object> arrayList1D = new ArrayList<Object>();
 ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
@@ -17,42 +23,13 @@ ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<A
 
 void setup() {
   size(600, 400, P3D);
+  background(150);
   noStroke();
-  background(0);
   fill(elementColor);
-  initLists();
   cp5 = new ControlP5(this);
   cam = new PeasyCam(this, 100);
-  draw();
-  DropdownList arrayTypeDropdown = cp5.addDropdownList("Array Type");
-  arrayTypeDropdown.setPosition(100, 100);
-  arrayTypeDropdown.setItemHeight(20);
-  arrayTypeDropdown.setBarHeight(15);
-  arrayTypeDropdown.captionLabel().style().marginTop = 3;
-  arrayTypeDropdown.captionLabel().style().marginLeft = 3;
-  arrayTypeDropdown.valueLabel().style().marginTop = 3;
-  arrayTypeDropdown.addItem("String", 0);
-  arrayTypeDropdown.addItem("int", 1);
-  arrayTypeDropdown.addItem("Double", 2);
-  arrayTypeDropdown.addItem("boolean", 3);
-
-  cp5.tab("default").remove();
-
-  Tab ArrayTab1D = cp5.addTab("1D Array");
-  ArrayTab1D.setWidth(tabWidth);
-  ArrayTab1D.bringToFront();
-  ArrayTab1D.activateEvent(true);
-
-  Tab ArrayTab2D = cp5.addTab("2D Array");
-  ArrayTab2D.setWidth(tabWidth);
-
-  Tab ArrayTab3D = cp5.addTab("3D Array");
-  ArrayTab3D.setWidth(tabWidth);
-
-  Tab ArrayTab4D = cp5.addTab("4D Array?");
-  ArrayTab4D.setWidth(tabWidth);
-
-  cp5.setAutoDraw(false);
+  initLists();
+  initGUI();
 }
 
 void draw() {
@@ -76,20 +53,18 @@ void draw() {
     break; 
   case 2 : 
     //3D Array
-    gui3D(); 
     break; 
   case 3 : 
     //4D Array?
-    gui3D(); 
     break;
   }
-  gui3D();
+  gui();
 }
 
-void gui3D() {
+void gui() {
   hint(DISABLE_DEPTH_TEST); 
   cam.beginHUD(); 
-  cp5.draw(); 
+  cp5.draw();
   cam.endHUD(); 
   hint(ENABLE_DEPTH_TEST);
 }
@@ -106,5 +81,50 @@ void initLists() {
   temp1DArrayList = null;
   temp2DArrayList = null;
   temp3DArrayList = null;
+}
+
+void initGUI() {
+  draw();
+
+  cp5.tab("default").remove();
+
+  arrayTab1D = cp5.addTab("1D Array");
+  arrayTab1D.setWidth(tabWidth);
+  arrayTab1D.bringToFront();
+  arrayTab1D.activateEvent(true);
+
+  arrayTab2D = cp5.addTab("2D Array");
+  arrayTab2D.setWidth(tabWidth);
+
+  arrayTab3D = cp5.addTab("3D Array");
+  arrayTab3D.setWidth(tabWidth);
+
+  arrayTab4D = cp5.addTab("4D Array?");
+  arrayTab4D.setWidth(tabWidth);
+  
+  settings = cp5.addGroup("Array Settings");
+  settings.setPosition(0,100);
+  settings.setBackgroundHeight(150);
+
+  arrayTypeDropdown = cp5.addDropdownList("Array Type");
+  arrayTypeDropdown.setPosition(2, 100);
+  arrayTypeDropdown.addItems(new String[] {
+    "String", "int", "Double", "boolean"
+  }
+  );
+  arrayTypeDropdown.setIndex(0);
+  arrayTypeDropdown.setGroup(settings);
+
+  cp5.setAutoDraw(false);
+}
+
+void controlEvent(ControlEvent theEvent) {
+
+  if (theEvent.isGroup()) {
+    // check if the Event was triggered from a ControlGroup
+    println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup());
+  } else if (theEvent.isController()) {
+    println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
+  }
 }
 
