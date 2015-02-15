@@ -1,5 +1,6 @@
 import controlP5.*;
 import peasy.*;
+
 public class GUI {
   private ControlP5 cp5;
   private PeasyCam cam;
@@ -14,12 +15,12 @@ public class GUI {
   private color background = #000000;
   private int tabWidth = 50;
 
-  public GUI(ControlP5 cp5, PeasyCam cam) {
+  public GUI(ControlP5 cp5S, PeasyCam camS) {
     background(150);
     fill(elementColor);
     noStroke();
-    this.cp5 = cp5;
-    this.cam = cam;
+    cp5 = cp5S;
+    cam = camS;
 
     draw();
 
