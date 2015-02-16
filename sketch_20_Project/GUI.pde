@@ -11,20 +11,15 @@ public class GUI {
   private Tab arrayTab2D;
   private Tab arrayTab3D;
   private Tab arrayTab4D;
-  private color elementColor = #123ABC;
-  private color background = #000000;
+  //private color elementColor = #123ABC;
+  //private color background = #000000;
   private int tabWidth = 50;
 
-  public GUI(ControlP5 cp5S, PeasyCam camS) {
-    background(150);
-    fill(elementColor);
-    noStroke();
-    cp5 = cp5S;
-    cam = camS;
+  public GUI(ControlP5 cp5, PeasyCam cam) {
+    this.cp5 = cp5;
+    this.cam = cam;
 
-    draw();
-
-    cp5.tab("default").remove();
+    cp5.getDefaultTab().remove();
 
     arrayTab1D = cp5.addTab("1D Array");
     arrayTab1D.setWidth(tabWidth);
@@ -68,4 +63,3 @@ public class GUI {
     hint(ENABLE_DEPTH_TEST);
   }
 }
-

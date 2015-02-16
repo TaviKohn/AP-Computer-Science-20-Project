@@ -1,8 +1,12 @@
 import controlP5.*;
 import peasy.*;
-GUI gui = new GUI(new ControlP5(this), new PeasyCam(this, 100));
 
-int xL, yL, zL, tL = 0;
+GUI gui;
+
+int xL = 0;
+int yL = 0;
+int zL = 0;
+int tL = 0;
 
 ArrayList<Object> arrayList1D = new ArrayList<Object>();
 ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
@@ -12,6 +16,10 @@ ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<A
 void setup() {
   size(displayWidth, displayHeight, P3D);
   initLists();
+  xL = arrayList1D.size();
+  yL = arrayList2D.get(0).size();
+  zL = arrayList3D.get(0).get(0).size();
+  gui = new GUI(new ControlP5(this), new PeasyCam(this, 100));
 }
 
 void draw() {
@@ -48,4 +56,3 @@ void initLists() {
   temp2DArrayList = null;
   temp3DArrayList = null;
 }
-
