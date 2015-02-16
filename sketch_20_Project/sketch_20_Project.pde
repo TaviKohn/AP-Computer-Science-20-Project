@@ -26,6 +26,7 @@ void draw() {
   xL = arrayList1D.size();
   yL = arrayList2D.get(0).size();
   zL = arrayList3D.get(0).get(0).size();
+  background(gui.getBackgroundColor());
   switch(gui.getMode()) {
   case 0:
     //1D Array

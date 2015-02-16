@@ -6,13 +6,14 @@ public class GUI {
   private PeasyCam cam;
   private Group settings;
   private DropdownList arrayTypeDropdown;
+  private Textlabel arrayTypeDropdownLabel;
   private int mode = 0;
   private Tab arrayTab1D;
   private Tab arrayTab2D;
   private Tab arrayTab3D;
   private Tab arrayTab4D;
   //private color elementColor = #123ABC;
-  //private color background = #000000;
+  private color background = #AAAAAA;
   private int tabWidth = 50;
 
   public GUI(ControlP5 cp5, PeasyCam cam) {
@@ -36,13 +37,20 @@ public class GUI {
     arrayTab4D.setWidth(tabWidth);
 
     settings = cp5.addGroup("Array Settings");
-    settings.setPosition(0, 100);
-    settings.setBackgroundHeight(150);
+    settings.setPosition(0, 50);
+    settings.setWidth(150);
+    settings.setBackgroundHeight(300);
+    settings.setBackgroundColor(100);
+    
+    arrayTypeDropdownLabel = cp5.addTextlabel("arrayTypeDropdownLabel");
+    arrayTypeDropdownLabel.setPosition(5,5);
+    arrayTypeDropdownLabel.setText("Array Type:");
+    arrayTypeDropdownLabel.setGroup(settings);
 
     arrayTypeDropdown = cp5.addDropdownList("Array Type");
-    arrayTypeDropdown.setPosition(2, 100);
+    arrayTypeDropdown.setPosition(5, 30);
     arrayTypeDropdown.addItems(new String[] {
-      "String", "int", "Double", "boolean"
+      "boolean", "int", "Double", "String"
     }
     );
     arrayTypeDropdown.setIndex(0);
@@ -53,6 +61,10 @@ public class GUI {
 
   public int getMode() {
     return mode;
+  }
+  
+  public color getBackgroundColor(){
+   return background; 
   }
 
   public void draw() {
