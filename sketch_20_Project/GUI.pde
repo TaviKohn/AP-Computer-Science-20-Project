@@ -49,7 +49,7 @@ public class GUI {
     settings.setPosition(0, 50);
     settings.setWidth(settingsGroupWidth);
     settings.setBackgroundHeight(settingsGroupHeight);
-    settings.setBackgroundColor(100);
+    settings.setBackgroundColor(background);
     
     arrayTypeDropdownLabel = cp5.addTextlabel("arrayTypeDropdownLabel");
     arrayTypeDropdownLabel.setPosition(5,5);
