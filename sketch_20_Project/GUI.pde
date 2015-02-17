@@ -12,13 +12,16 @@ public class GUI {
   private Tab arrayTab2D;
   private Tab arrayTab3D;
   private Tab arrayTab4D;
-  private color background = #AAAAAA;
+  private color background = #888888;
+  private color groupBackground = #AAAAAA;
   private int tabWidth = displayWidth / 4;
   private int tabHeight = displayHeight / 25;
   private int dropdownWidth = displayWidth / 5;
   private int dropdownHeight = displayHeight / 5;
+  private int dropdownBarWidth = displayHeight / 50;
   private int dropdownItemHeight = displayHeight / 50;
   private int settingsGroupWidth = displayWidth / 4;
+  private int settingsBarWidth = displayHeight / 50;
   private int settingsGroupHeight = (int)(displayHeight * 0.75);
 
   public GUI(ControlP5 cp5, PeasyCam cam) {
@@ -48,8 +51,9 @@ public class GUI {
     settings = cp5.addGroup("Array Settings");
     settings.setPosition(0, 50);
     settings.setWidth(settingsGroupWidth);
+    //settings.setLabelWidth(settingsBarWidth);
     settings.setBackgroundHeight(settingsGroupHeight);
-    settings.setBackgroundColor(background);
+    settings.setBackgroundColor(groupBackground);
     
     arrayTypeDropdownLabel = cp5.addTextlabel("arrayTypeDropdownLabel");
     arrayTypeDropdownLabel.setPosition(5,5);
@@ -60,6 +64,7 @@ public class GUI {
     arrayTypeDropdown = cp5.addDropdownList("Array Type");
     arrayTypeDropdown.setPosition(5, 30);
     arrayTypeDropdown.setWidth(dropdownWidth);
+    arrayTypeDropdown.setScrollbarWidth(dropdownBarWidth);
     arrayTypeDropdown.setHeight(dropdownHeight);
     //arrayTypeDropdown.setItemWidth(dropdownItemWidth);
     arrayTypeDropdown.setItemHeight(dropdownItemHeight);
