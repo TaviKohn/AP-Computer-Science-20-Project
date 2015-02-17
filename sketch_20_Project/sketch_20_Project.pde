@@ -1,90 +1,47 @@
-import peasy.*;
 import controlP5.*;
-int mode = 0;
+import peasy.*;
 
-ControlP5 cp5;
-PeasyCam cam;
+GUI gui;
 
-color elementColor = #123ABC;
-color background = #000000;
-int tabWidth = 50;
-int xL, yL, zL, tL = 0;
+int xL = 0;
+int yL = 0;
+int zL = 0;
+int tL = 0;
 
-ArrayList<Object> arrayList1D = new ArrayList<Object>();
+ArrayList<Object> arra yList1D = new ArrayList<Object>();
 ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
 ArrayList<ArrayList<ArrayList<Object>>> arrayList3D = new ArrayList<ArrayList<ArrayList<Object>>>();
 ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<ArrayList<ArrayList<ArrayList<Object>>>>();
 
 void setup() {
-  size(600, 400, P3D);
-  noStroke();
-  background(0);
-  fill(elementColor);
+  size(displayWidth, displayHeight, P3D);
   initLists();
-  cp5 = new ControlP5(this);
-  cam = new PeasyCam(this, 100);
-  cp5.addDropdownList("Array Type")
-  .addItems(new String[] {
-    "String", "int", "double", "boolean"
-  }
-  )
-    ;
-  cp5.tab("default").remove();
-  cp5.addTab("1D Array")
-    .setWidth(tabWidth)
-      .bringToFront()
-        .activateEvent(true);
-  ;
-  cp5.addTab("2D Array")
-    .setWidth(tabWidth)
-      ;
-  cp5.addTab("3D Array")
-    .setWidth(tabWidth)
-      ;
-  cp5.addTab("4D Array?")
-    .setWidth(tabWidth)
-      ;
-  cp5.setAutoDraw(false);
+  xL = arrayList1D.size();
+  yL = arrayList2D.get(0).size();
+  zL = arrayList3D.get(0).get(0).size();
+  gui = new GUI(new ControlP5(this), new PeasyCam(this, 100));
 }
 
 void draw() {
   xL = arrayList1D.size();
   yL = arrayList2D.get(0).size();
   zL = arrayList3D.get(0).get(0).size();
-  switch(mode) {
+  background(gui.getBackgroundColor());
+  switch(gui.getMode()) {
   case 0:
-    hint(DISABLE_DEPTH_TEST);
-    cam.beginHUD();
     //1D Array
-
-    cam.endHUD(); 
-    hint(ENABLE_DEPTH_TEST); 
     break; 
   case 1 : 
-    hint(DISABLE_DEPTH_TEST); 
-    cam.beginHUD(); 
     //2D Array
-    cam.endHUD(); 
-    hint(ENABLE_DEPTH_TEST); 
     break; 
   case 2 : 
     //3D Array
-    gui3D(); 
     break; 
   case 3 : 
     //4D Array?
-    gui3D(); 
     break;
   }
-  gui3D();
-}
-
-void gui3D() {
-  hint(DISABLE_DEPTH_TEST); 
-  cam.beginHUD(); 
-  cp5.draw(); 
-  cam.endHUD(); 
-  hint(ENABLE_DEPTH_TEST);
+  gui.draw();
 }
 
 void initLists() {
@@ -100,4 +57,3 @@ void initLists() {
   temp2DArrayList = null;
   temp3DArrayList = null;
 }
-
