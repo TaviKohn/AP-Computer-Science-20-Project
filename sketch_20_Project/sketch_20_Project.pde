@@ -8,7 +8,7 @@ int yL = 0;
 int zL = 0;
 int tL = 0;
 
-ArrayList<Object> arra yList1D = new ArrayList<Object>();
+ArrayList<Object> arrayList1D = new ArrayList<Object>();
 ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
 ArrayList<ArrayList<ArrayList<Object>>> arrayList3D = new ArrayList<ArrayList<ArrayList<Object>>>();
 ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<ArrayList<ArrayList<ArrayList<Object>>>>();
