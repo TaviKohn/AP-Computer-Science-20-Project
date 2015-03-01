@@ -5,7 +5,7 @@ public class GUI {
   private ControlP5 cp5;
   private PeasyCam cam;
   private int fontHeight = 12;
-  private PFont pfont = createFont("BankGothic-24", 20, true); // use true/false for smooth/no-smooth
+  private PFont pfont = createFont("BankGothic-Medium-24.vlw", 24, true); // use true/false for smooth/no-smooth
   private ControlFont font = new ControlFont(pfont, fontHeight);
   private Group settings;
   private DropdownList arrayTypeDropdown;
@@ -15,11 +15,7 @@ public class GUI {
   private Numberbox arraySizeZNumberbox;
   private Numberbox arraySizeTNumberbox;
   private Textlabel arraySizeLabel;
-  private Textlabel arraySizeXLabel;
-  private Textlabel arraySizeYLabel;
-  private Textlabel arraySizeZLabel;
-  private Textlabel arraySizeTLabel;
-  private int mode = 0;
+  private int mode = 2;
   private Tab arrayTab1D;
   private Tab arrayTab2D;
   private Tab arrayTab3D;
@@ -37,7 +33,7 @@ public class GUI {
   private int dropdownHeight = displayHeight / 2;
   private int dropdownItemHeight = fontHeight * 2;
   private int arraySizeWidth = fontHeight * 10;
-  private int arraySizeHeight = fontHeight * 2;
+  private int arraySizeHeight = (int)(fontHeight * 1.5);
 
   private int arrayTypeLabelOffsetX = fontHeight;
   private int arrayTypeLabelOffsetY = -(fontHeight * 5);
@@ -47,11 +43,9 @@ public class GUI {
 
   private int arraySizeLabelOffsetX = 0;
   private int arraySizeLabelOffsetY = fontHeight;
-  private int arraySizeXLabelOffsetX = 0;
-  private int arraySizeXLabelOffsetY = fontHeight;
 
   private int arraySizeXNumberboxOffsetX = 0;
-  private int arraySizeXNumberboxOffsetY = fontHeight * 2;
+  private int arraySizeXNumberboxOffsetY = (int)(fontHeight * 1.5);
 
   private int settingsX = 0;
   private int settingsY = (int)(fontHeight * 3.7);
@@ -65,15 +59,15 @@ public class GUI {
   private int arraySizeLabelX = arrayTypeX + arraySizeLabelOffsetX;
   private int arraySizeLabelY = arrayTypeY + arraySizeLabelOffsetY;
 
-  private int arraySizeXLabelX = arraySizeLabelX + arraySizeXLabelOffsetX;
-  private int arraySizeXLabelY = arraySizeLabelY + arraySizeXLabelOffsetY;
-
-  private int arraySizeXNumberboxX = arraySizeXLabelX + arraySizeXNumberboxOffsetX;
-  private int arraySizeXNumberboxY = arraySizeXLabelY + arraySizeXNumberboxOffsetY;
+  private int arraySizeXNumberboxX = arraySizeLabelX + arraySizeXNumberboxOffsetX;
+  private int arraySizeXNumberboxY = arraySizeLabelY + arraySizeXNumberboxOffsetY;
 
   public GUI(ControlP5 cp5, PeasyCam cam) {
     this.cp5 = cp5;
     this.cam = cam;
+    cam.setMinimumDistance(100);
+    cam.setMaximumDistance(1000);
+    stroke(#FFFFFF);
 
     cp5.getDefaultTab().remove();
     cp5.setFont(font);
@@ -104,9 +98,24 @@ public class GUI {
     settings.setBackgroundColor(groupBackground);
     settings.setMoveable(true);
 
+    arraySizeLabel = cp5.addTextlabel("arraySizeLabel");
+    arraySizeLabel.setPosition(arraySizeLabelX, arraySizeLabelY);
+    arraySizeLabel.setText("ARRAY DIMENSIONS:");
+    arraySizeLabel.setGroup(settings);
+
+font = new ControlFont(pfont, fontHeight);
+
+    arraySizeXNumberbox = cp5.addNumberbox("arraySizeXNumberbox");
+    arraySizeXNumberbox.setPosition(arraySizeXNumberboxX, arraySizeXNumberboxY);
+    arraySizeXNumberbox.setSize(arraySizeWidth, arraySizeHeight);
+    arraySizeXNumberbox.setLabel("Array Size X");
+    arraySizeXNumberbox.setRange(0, 10);
+    arraySizeXNumberbox.setScrollSensitivity(1.25);
+    arraySizeXNumberbox.setGroup(settings);
+
     arrayTypeDropdownLabel = cp5.addTextlabel("arrayTypeDropdownLabel");
     arrayTypeDropdownLabel.setPosition(arrayTypeLabelX, arrayTypeLabelY);
-    arrayTypeDropdownLabel.setText("Array Type:");
+    arrayTypeDropdownLabel.setText("ARRAY TYPE:");
     arrayTypeDropdownLabel.setGroup(settings);
 
     arrayTypeDropdown = cp5.addDropdownList("Array Type");
@@ -121,19 +130,6 @@ public class GUI {
     );
     arrayTypeDropdown.setIndex(0);
     arrayTypeDropdown.setGroup(settings);
-
-    arraySizeLabel = cp5.addTextlabel("arraySizeLabel");
-    arraySizeLabel.setPosition(arraySizeLabelX, arraySizeLabelY);
-    arraySizeLabel.setText("ARRAYDIMENSIONS:");
-    arraySizeLabel.setGroup(settings);
-
-    arraySizeXNumberbox = cp5.addNumberbox("arraySizeXNumberbox");
-    arraySizeXNumberbox.setPosition(arraySizeXNumberboxX, arraySizeXNumberboxY);
-    arraySizeXNumberbox.setSize(arraySizeWidth, arraySizeHeight);
-    arraySizeXNumberbox.setLabel("Array Size X");
-    arraySizeXNumberbox.setRange(0, 10);
-    arraySizeXNumberbox.setScrollSensitivity(1.5);
-    arraySizeXNumberbox.setGroup(settings);
 
     cp5.setAutoDraw(false);
   }

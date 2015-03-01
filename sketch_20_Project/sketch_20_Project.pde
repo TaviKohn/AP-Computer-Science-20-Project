@@ -35,7 +35,14 @@ void draw() {
     //2D Array
     break; 
   case 2 : 
-    //3D Array
+    background(0);
+  fill(255,0,0);
+  box(30);
+  pushMatrix();
+  translate(0,0,20);
+  fill(0,0,255);
+  box(5);
+  popMatrix();
     break; 
   case 3 : 
     //4D Array?
