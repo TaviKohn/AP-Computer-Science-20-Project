@@ -8,7 +8,7 @@ import wblut.core.*;
 import controlP5.*;
 import peasy.*;
 
-GUI gui;
+CP5GUI gui;
 Boxen  cubes;
 
 private int xL = 0;
@@ -28,7 +28,7 @@ void setup() {
   xL = arrayList1D.size();
   yL = arrayList2D.get(0).size();
   zL = arrayList3D.get(0).get(0).size();
-  gui = new GUI(new ControlP5(this), new PeasyCam(this, 100));
+  gui = new CP5GUI(new ControlP5(this), new PeasyCam(this, 100));
 }
 
 void draw() {

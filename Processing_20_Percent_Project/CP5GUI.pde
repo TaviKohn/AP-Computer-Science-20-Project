@@ -1,7 +1,7 @@
 import controlP5.*;
 import peasy.*;
 
-public class GUI {
+public class CP5GUI {
   private ControlP5 cp5;
   private PeasyCam cam;
   private int fontHeight = 12;
@@ -62,7 +62,7 @@ public class GUI {
   private int arraySizeXNumberboxX = arraySizeLabelX + arraySizeXNumberboxOffsetX;
   private int arraySizeXNumberboxY = arraySizeLabelY + arraySizeXNumberboxOffsetY;
 
-  public GUI(ControlP5 cp5, PeasyCam cam) {
+  public void GUI(ControlP5 cp5, PeasyCam cam) {
     this.cp5 = cp5;
     this.cam = cam;
     cam.setMinimumDistance(100);
