@@ -1,17 +1,26 @@
+
+import wblut.hemesh.*;
+import wblut.geom.*;
+import wblut.math.*;
+import wblut.processing.*;
+import wblut.core.*;
+
 import controlP5.*;
 import peasy.*;
 
 GUI gui;
+Boxen  cubes;
 
-int xL = 0;
-int yL = 0;
-int zL = 0;
-int tL = 0;
+private int xL = 0;
+private int yL = 0;
+private int zL = 0;
+private int tL = 0;
 
-ArrayList<Object> arrayList1D = new ArrayList<Object>();
-ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
-ArrayList<ArrayList<ArrayList<Object>>> arrayList3D = new ArrayList<ArrayList<ArrayList<Object>>>();
-ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<ArrayList<ArrayList<ArrayList<Object>>>>();
+private ArrayList<Object> arrayList1D = new ArrayList<Object>();
+private ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
+private ArrayList<ArrayList<ArrayList<Object>>> arrayList3D = new ArrayList<ArrayList<ArrayList<Object>>>();
+private ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<ArrayList<ArrayList<ArrayList<Object>>>>();
+
 
 void setup() {
   size(displayWidth, displayHeight, P3D);
@@ -27,7 +36,7 @@ void draw() {
   yL = arrayList2D.get(0).size();
   zL = arrayList3D.get(0).get(0).size();
   background(gui.getBackgroundColor());
-  switch(gui.getMode()) {
+  /*switch(gui.getMode()) {
   case 0:
     //1D Array
     break; 
@@ -35,19 +44,13 @@ void draw() {
     //2D Array
     break; 
   case 2 : 
-    background(0);
-  fill(255,0,0);
-  box(30);
-  pushMatrix();
-  translate(0,0,20);
-  fill(0,0,255);
-  box(5);
-  popMatrix();
     break; 
   case 3 : 
     //4D Array?
     break;
   }
+  */
+  cubes.draw();
   gui.draw();
 }
 

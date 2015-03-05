@@ -103,7 +103,7 @@ public class GUI {
     arraySizeLabel.setText("ARRAY DIMENSIONS:");
     arraySizeLabel.setGroup(settings);
 
-font = new ControlFont(pfont, fontHeight);
+    font = new ControlFont(pfont, fontHeight);
 
     arraySizeXNumberbox = cp5.addNumberbox("arraySizeXNumberbox");
     arraySizeXNumberbox.setPosition(arraySizeXNumberboxX, arraySizeXNumberboxY);
@@ -124,8 +124,12 @@ font = new ControlFont(pfont, fontHeight);
     arrayTypeDropdown.setBarHeight(dropdownBarHeight);
     arrayTypeDropdown.setHeight(dropdownHeight);
     arrayTypeDropdown.setItemHeight(dropdownItemHeight);
-    arrayTypeDropdown.addItems(new String[] {
-      "boolean", "int", "Double", "String"
+    /*arrayTypeDropdown.addItems(new String[] {
+     "boolean", "int", "Double", "String"
+     }
+     );*/
+    arrayTypeDropdown.addItems(new String[] { 
+      "boolean"
     }
     );
     arrayTypeDropdown.setIndex(0);
@@ -149,4 +153,5 @@ font = new ControlFont(pfont, fontHeight);
     cam.endHUD(); 
     hint(ENABLE_DEPTH_TEST);
   }
-}  
+}
+}
