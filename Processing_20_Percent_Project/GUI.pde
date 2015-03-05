@@ -1,7 +1,7 @@
 import controlP5.*;
 import peasy.*;
 
-public class CP5GUI {
+public class GUI {
   private ControlP5 cp5;
   private PeasyCam cam;
   private int fontHeight = 12;
@@ -62,9 +62,9 @@ public class CP5GUI {
   private int arraySizeXNumberboxX = arraySizeLabelX + arraySizeXNumberboxOffsetX;
   private int arraySizeXNumberboxY = arraySizeLabelY + arraySizeXNumberboxOffsetY;
 
-  public void GUI(ControlP5 cp5, PeasyCam cam) {
-    this.cp5 = cp5;
-    this.cam = cam;
+  public GUI(PApplet applet) {
+    cp5 = new ControlP5(applet);
+    cam = new PeasyCam(applet, 100);
     cam.setMinimumDistance(100);
     cam.setMaximumDistance(1000);
     stroke(#FFFFFF);
@@ -153,5 +153,4 @@ public class CP5GUI {
     cam.endHUD(); 
     hint(ENABLE_DEPTH_TEST);
   }
-}
 }

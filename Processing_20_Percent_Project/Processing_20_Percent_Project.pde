@@ -1,4 +1,3 @@
-
 import wblut.hemesh.*;
 import wblut.geom.*;
 import wblut.math.*;
@@ -8,18 +7,18 @@ import wblut.core.*;
 import controlP5.*;
 import peasy.*;
 
-CP5GUI gui;
-Boxen  cubes;
+GUI gui;
+Boxen cubes;
 
-private int xL = 0;
-private int yL = 0;
-private int zL = 0;
-private int tL = 0;
+int xL = 0;
+int yL = 0;
+int zL = 0;
+int tL = 0;
 
-private ArrayList<Object> arrayList1D = new ArrayList<Object>();
-private ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
-private ArrayList<ArrayList<ArrayList<Object>>> arrayList3D = new ArrayList<ArrayList<ArrayList<Object>>>();
-private ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<ArrayList<ArrayList<ArrayList<Object>>>>();
+ArrayList<Object> arrayList1D = new ArrayList<Object>();
+ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
+ArrayList<ArrayList<ArrayList<Object>>> arrayList3D = new ArrayList<ArrayList<ArrayList<Object>>>();
+ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<ArrayList<ArrayList<ArrayList<Object>>>>();
 
 
 void setup() {
@@ -28,7 +27,8 @@ void setup() {
   xL = arrayList1D.size();
   yL = arrayList2D.get(0).size();
   zL = arrayList3D.get(0).get(0).size();
-  gui = new CP5GUI(new ControlP5(this), new PeasyCam(this, 100));
+  gui = new GUI(this);
+  cubes = new Boxen(this);
 }
 
 void draw() {

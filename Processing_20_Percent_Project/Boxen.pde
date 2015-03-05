@@ -4,30 +4,30 @@ import wblut.math.*;
 import wblut.processing.*;
 import wblut.core.*;
 
-private int xN = 0;
-private int yN = 0;
-private int zN = 0;
-private int tN = 0;
+int xN = 0;
+int yN = 0;
+int zN = 0;
+int tN = 0;
 
-private int selectedBox;
+int selectedBox;
 
-private ArrayList<HE_Mesh> arrayList1DBoxen = new ArrayList<HE_Mesh>();
-private ArrayList<ArrayList<HE_Mesh>> arrayList2DBoxen = new ArrayList<ArrayList<HE_Mesh>>();
-private ArrayList<ArrayList<ArrayList<HE_Mesh>>> arrayList3DBoxen = new ArrayList<ArrayList<ArrayList<HE_Mesh>>>();
-private ArrayList<ArrayList<ArrayList<ArrayList<HE_Mesh>>>> arrayList4DBoxen = new ArrayList<ArrayList<ArrayList<ArrayList<HE_Mesh>>>>();
-//private ArrayList<HE_Mesh> boxen = new ArrayList<HE_MESH>();
+ArrayList<HE_Mesh> arrayList1DBoxen = new ArrayList<HE_Mesh>();
+ArrayList<ArrayList<HE_Mesh>> arrayList2DBoxen = new ArrayList<ArrayList<HE_Mesh>>();
+ArrayList<ArrayList<ArrayList<HE_Mesh>>> arrayList3DBoxen = new ArrayList<ArrayList<ArrayList<HE_Mesh>>>();
+ArrayList<ArrayList<ArrayList<ArrayList<HE_Mesh>>>> arrayList4DBoxen = new ArrayList<ArrayList<ArrayList<ArrayList<HE_Mesh>>>>();
+ArrayList<HE_Mesh> boxen = new ArrayList<HE_Mesh>();
 
-private HE_Mesh box;
-private HEC_Box boxCreator;
-private HE_Selection selection;
-private WB_Render3D render;
-private WB_AABBTree tree;
+HE_Mesh box;
+HEC_Box boxCreator;
+HE_Selection selection;
+WB_Render3D render;
+WB_AABBTree tree;
 
 public class Boxen {
-  public void Boxen(PApplet applet) {
-    xN = arrayList1DBoxen.size();
-    yN = arrayList2DBoxen.get(0).size();
-    zN = arrayList3DBoxen.get(0).get(0).size();
+  public Boxen(PApplet applet) {
+    //xN = arrayList1DBoxen.size();
+    //yN = arrayList2DBoxen.get(0).size();
+    //zN = arrayList3DBoxen.get(0).get(0).size();
     boxCreator = new HEC_Box();
     boxCreator.setWidth(20);
     boxCreator.setWidthSegments(1);
@@ -43,6 +43,9 @@ public class Boxen {
   }
 
   public void resizeBoxenArray() {
+    if(boxen.size() != 1){
+     boxen.add(box); 
+    }
   }
 
   public void draw() {
@@ -61,3 +64,4 @@ public class Boxen {
       render.drawEdges(boxi);
     }
   }
+}
