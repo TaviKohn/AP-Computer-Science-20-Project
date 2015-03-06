@@ -10,10 +10,13 @@ import peasy.*;
 GUI gui;
 Boxen cubes;
 
+PeasyCam cam;
+
 int xL = 0;
 int yL = 0;
 int zL = 0;
 int tL = 0;
+int mode = 3;
 
 ArrayList<Object> arrayList1D = new ArrayList<Object>();
 ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
@@ -27,8 +30,10 @@ void setup() {
   xL = arrayList1D.size();
   yL = arrayList2D.get(0).size();
   zL = arrayList3D.get(0).get(0).size();
-  gui = new GUI(this);
+  cam = new PeasyCam(this, 100);
+  gui = new GUI(new ControlP5(this), cam);
   cubes = new Boxen(this);
+  noSmooth();
 }
 
 void draw() {
@@ -36,22 +41,27 @@ void draw() {
   yL = arrayList2D.get(0).size();
   zL = arrayList3D.get(0).get(0).size();
   background(gui.getBackgroundColor());
-  /*switch(gui.getMode()) {
-  case 0:
+  switch(gui.getMode()) {
+  case 1:
+    gui.activateArrayTab1D();
     //1D Array
     break; 
-  case 1 : 
+  case 2 :
+    gui.activateArrayTab2D();
     //2D Array
     break; 
-  case 2 : 
+  case 3 :
+    gui.activateArrayTab3D();
+    //3D Array
     break; 
-  case 3 : 
+  case 4 :
+    gui.activateArrayTab4D();
     //4D Array?
     break;
   }
-  */
   cubes.draw();
   gui.draw();
+  mode = gui.getMode();
 }
 
 void initLists() {
@@ -66,4 +76,16 @@ void initLists() {
   temp1DArrayList = null;
   temp2DArrayList = null;
   temp3DArrayList = null;
+}
+
+void controlEvent(ControlEvent event) {
+  if (event.isTab()) {
+    cam.reset();
+    gui.setMode(event.getTab().getId());
+    println("Mode:" + mode);
+  }
+}
+
+void mouseClicked() {
+  cubes.mouseClicked();
 }
