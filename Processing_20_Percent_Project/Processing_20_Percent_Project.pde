@@ -33,7 +33,9 @@ void setup() {
   cam = new PeasyCam(this, 100);
   gui = new GUI(new ControlP5(this), cam);
   cubes = new Boxen(this);
+  frameRate(20);
   noSmooth();
+  cubes.resizeBoxenArray(5, 5, 5, 5);
 }
 
 void draw() {
@@ -82,7 +84,6 @@ void controlEvent(ControlEvent event) {
   if (event.isTab()) {
     cam.reset();
     gui.setMode(event.getTab().getId());
-    println("Mode:" + mode);
   }
 }
 

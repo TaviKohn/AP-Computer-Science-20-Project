@@ -25,6 +25,7 @@ public class GUI {
   private Tab arrayTab4D;
   private color background = #888888;
   private color groupBackground = #AAAAAA;
+  private int drawCount = 0;
 
   private int tabWidth = displayWidth / 4;
   private int tabHeight = 2 * fontHeight;
@@ -132,7 +133,7 @@ public class GUI {
     arraySizeXNumberbox.setPosition(arraySizeXNumberboxX, arraySizeXNumberboxY);
     arraySizeXNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeXNumberbox.setCaptionLabel("Array Size X");
-    arraySizeXNumberbox.setRange(0, 50);
+    arraySizeXNumberbox.setRange(0, 10);
     arraySizeXNumberbox.setGroup(settings1D);
 
     arrayTypeDropdownLabel = cp5.addTextlabel("arrayTypeDropdownLabel");
@@ -165,49 +166,66 @@ public class GUI {
     arraySizeYNumberbox.setPosition(arraySizeYNumberboxX, arraySizeYNumberboxY);
     arraySizeYNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeYNumberbox.setCaptionLabel("Array Size Y");
-    arraySizeYNumberbox.setRange(0, 50);
+    arraySizeYNumberbox.setRange(0, 10);
     arraySizeYNumberbox.setGroup(settings2D);
 
     arraySizeZNumberbox = cp5.addNumberbox("arraySizeZNumberbox");
     arraySizeZNumberbox.setPosition(arraySizeZNumberboxX, arraySizeZNumberboxY);
     arraySizeZNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeZNumberbox.setCaptionLabel("Array Size Z");
-    arraySizeZNumberbox.setRange(0, 50);
+    arraySizeZNumberbox.setRange(0, 10);
     arraySizeZNumberbox.setGroup(settings3D);
 
     arraySizeTNumberbox = cp5.addNumberbox("arraySizeTNumberbox");
     arraySizeTNumberbox.setPosition(arraySizeTNumberboxX, arraySizeTNumberboxY);
     arraySizeTNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeTNumberbox.setCaptionLabel("Array Size T");
-    arraySizeTNumberbox.setRange(0, 50);
+    arraySizeTNumberbox.setRange(0, 10);
     arraySizeTNumberbox.setGroup(settings4D);
 
-    //settings1D.moveTo(arrayTab1D);
-    //settings2D.moveTo(arrayTab2D);
-    //settings3D.moveTo(arrayTab3D);
-    //settings4D.moveTo(arrayTab4D);
+    settings1D.moveTo(arrayTab1D);
+    settings2D.moveTo(arrayTab2D);
+    settings3D.moveTo(arrayTab3D);
+    settings4D.moveTo(arrayTab4D);
+    settings1D.moveTo(arrayTab1D);
 
     cp5.setAutoDraw(false);
   }
-  
-  public void activateArrayTab1D(){
+
+  public void activateArrayTab1D() {
     settings1D.moveTo(arrayTab1D);
   }
-  
-  public void activateArrayTab2D(){
+
+  public void activateArrayTab2D() {
     settings2D.moveTo(arrayTab2D);
   }
-  
-  public void activateArrayTab3D(){
+
+  public void activateArrayTab3D() {
     settings3D.moveTo(arrayTab3D);
   }
-  
-  public void activateArrayTab4D(){
+
+  public void activateArrayTab4D() {
     settings4D.moveTo(arrayTab4D);
   }
 
   public int getMode() {
     return mode;
+  }
+
+  public int getXL() {
+    return 5;
+  }
+
+  public int getYL() {
+    return 5;
+  }
+
+  public int getZL() {
+    return 5;
+  }
+
+  public int getTL() {
+    return 5;
   }
 
   public void setMode(int mode) {
@@ -223,10 +241,18 @@ public class GUI {
   }
 
   public void draw() {
-    //hint(DISABLE_DEPTH_TEST); 
-    cam.beginHUD();
-    cp5.draw();
-    cam.endHUD(); 
-    //hint(ENABLE_DEPTH_TEST);
+    if (millis() - drawCount > 10) {
+      hint(DISABLE_DEPTH_TEST); 
+      cam.beginHUD();
+      cp5.draw();
+      cam.endHUD(); 
+      hint(ENABLE_DEPTH_TEST);
+      drawCount = 0;
+    } else {
+      drawCount++;
+    }
+  }
+
+  public void getRender() {
   }
 }
