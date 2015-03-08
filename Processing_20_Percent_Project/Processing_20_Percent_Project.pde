@@ -33,21 +33,22 @@ void setup() {
   int timeMarker = millis();
   println("Initializing Camera");
   cam = new PeasyCam(this, 100);
-  println("Finished :\t" + (millis() - timeMarker) / 1000  + "s");
+  println("Finished :\t" + (double)(millis() - timeMarker) / 1000  + "s");
   println("Initializing GUI");
   gui = new GUI(new ControlP5(this), cam);
-  println("Finished :\t" + (millis() - timeMarker) / 1000  + "s");
+  println("Finished :\t" + (double)(millis() - timeMarker) / 1000  + "s");
   println("Initializing Boxen");
   cubes = new Boxen(this);
-  println("Finished :\t" + (millis() - timeMarker) / 1000  + "s");
+  println("Finished :\t" + (double)(millis() - timeMarker) / 1000  + "s");
   frameRate(30);
-  smooth(0);
+  smooth(8);
+  lights();
 }
 
 void draw() {
-  xL = arrayList1D.size();
-  yL = arrayList2D.get(0).size();
-  zL = arrayList3D.get(0).get(0).size();
+  //xL = arrayList1D.size();
+  //yL = arrayList2D.get(0).size();
+  //zL = arrayList3D.get(0).get(0).size();
   background(gui.getBackgroundColor());
   switch(gui.getMode()) {
   case 1:
@@ -90,6 +91,7 @@ void controlEvent(ControlEvent event) {
   if (event.isTab()) {
     cam.reset();
     gui.setMode(event.getTab().getId());
+    println("TabEvent Happened\t" + event.getTab().getId());
   }
 }
 
@@ -98,38 +100,41 @@ void mouseClicked() {
 }
 
 void arraySizeXNumberbox(int value) {
-  println("arraySizeXNumberbox Updated to :\t" + value);
-  hint(DISABLE_DEPTH_TEST); 
-  cam.beginHUD();
-  xL = value;
-  cubes.resizeBoxenArray(xL, yL, zL, tL);
-  cam.endHUD(); 
-  hint(ENABLE_DEPTH_TEST);
+  if (xL != value) {    //only update if the value on the slider changes
+    println("arraySizeXNumberbox Updated to :\t" + value);
+    cam.beginHUD();
+    xL = value;
+    cubes.resizeBoxenArray(xL, yL, zL, tL);
+    cam.endHUD();
+  }
 }
 
 void arraySizeYNumberbox(int value) {
-  println("arraySizeTNumberbox Updated to :\t" + value);
-  hint(DISABLE_DEPTH_TEST); 
-  cam.beginHUD();
-  yL = value;
-  cubes.resizeBoxenArray(xL, yL, zL, tL);
-  println("arraySizeYNumberbox Updated to :\t" + value);
-  cam.endHUD(); 
-  hint(ENABLE_DEPTH_TEST);
+  if (yL != value) {    //only update if the value on the slider changes
+    println("arraySizeYNumberbox Updated to :\t" + value);
+    cam.beginHUD();
+    yL = value;
+    cubes.resizeBoxenArray(xL, yL, zL, tL);
+    cam.endHUD();
+  }
 }
 
 void arraySizeZNumberbox(int value) {
-  println("arraySizeZNumberbox Updated to :\t" + value);
-  hint(DISABLE_DEPTH_TEST); 
-  cam.beginHUD();
-  zL = value;
-  cubes.resizeBoxenArray(xL, yL, zL, tL);
-  cam.endHUD(); 
-  hint(ENABLE_DEPTH_TEST);
+  if (zL != value) {    //only update if the value on the slider changes
+    println("arraySizeZNumberbox Updated to :\t" + value);
+    cam.beginHUD();
+    zL = value;
+    cubes.resizeBoxenArray(xL, yL, zL, tL);
+    cam.endHUD();
+  }
 }
 
 void arraySizeTNumberbox(int value) {
-  println("arraySizeTNumberbox Updated to :\t" + value);
-  tL = value;
-  cubes.resizeBoxenArray(xL, yL, zL, tL);
+  if (tL != value) {    //only update if the value on the slider changes
+    println("arraySizeTNumberbox Updated to :\t" + value);
+    cam.beginHUD();
+    tL = value;
+    cubes.resizeBoxenArray(xL, yL, zL, tL);
+    cam.endHUD();
+  }
 }

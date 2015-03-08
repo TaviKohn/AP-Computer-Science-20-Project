@@ -1,6 +1,3 @@
-import controlP5.*;
-import peasy.*;
-
 public class GUI {
   private ControlP5 cp5;
   private PeasyCam cam;
@@ -133,7 +130,7 @@ public class GUI {
     arraySizeXNumberbox.setPosition(arraySizeXNumberboxX, arraySizeXNumberboxY);
     arraySizeXNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeXNumberbox.setCaptionLabel("Array Size X");
-    arraySizeXNumberbox.setRange(0, 10);
+    arraySizeXNumberbox.setRange(1, 10);
     arraySizeXNumberbox.setValue(5);
     arraySizeXNumberbox.setGroup(settings1D);
 
@@ -167,7 +164,7 @@ public class GUI {
     arraySizeYNumberbox.setPosition(arraySizeYNumberboxX, arraySizeYNumberboxY);
     arraySizeYNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeYNumberbox.setCaptionLabel("Array Size Y");
-    arraySizeYNumberbox.setRange(0, 10);
+    arraySizeYNumberbox.setRange(1, 10);
     arraySizeYNumberbox.setValue(5);
     arraySizeYNumberbox.setGroup(settings2D);
 
@@ -175,7 +172,7 @@ public class GUI {
     arraySizeZNumberbox.setPosition(arraySizeZNumberboxX, arraySizeZNumberboxY);
     arraySizeZNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeZNumberbox.setCaptionLabel("Array Size Z");
-    arraySizeZNumberbox.setRange(0, 10);
+    arraySizeZNumberbox.setRange(1, 10);
     arraySizeZNumberbox.setValue(5);
     arraySizeZNumberbox.setGroup(settings3D);
 
@@ -183,7 +180,7 @@ public class GUI {
     arraySizeTNumberbox.setPosition(arraySizeTNumberboxX, arraySizeTNumberboxY);
     arraySizeTNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeTNumberbox.setCaptionLabel("Array Size T");
-    arraySizeTNumberbox.setRange(0, 10);
+    arraySizeTNumberbox.setRange(1, 10);
     arraySizeTNumberbox.setValue(5);
     arraySizeTNumberbox.setGroup(settings4D);
 

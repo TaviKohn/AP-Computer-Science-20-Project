@@ -1,29 +1,23 @@
-import wblut.hemesh.*; //<>//
-import wblut.geom.*;
-import wblut.math.*;
-import wblut.processing.*;
-import wblut.core.*;
+public class Boxen { //<>//
+  int xN = 5;
+  int yN = 5;
+  int zN = 5;
+  int tN = 5;
 
-int xN = 5;
-int yN = 5;
-int zN = 5;
-int tN = 5;
+  int selectedBox;
 
-int selectedBox;
+  //ArrayList<HE_Mesh> arrayList1DBoxen = new ArrayList<HE_Mesh>();
+  //ArrayList<ArrayList<HE_Mesh>> arrayList2DBoxen = new ArrayList<ArrayList<HE_Mesh>>();
+  //ArrayList<ArrayList<ArrayList<HE_Mesh>>> arrayList3DBoxen = new ArrayList<ArrayList<ArrayList<HE_Mesh>>>();
+  //ArrayList<ArrayList<ArrayList<ArrayList<HE_Mesh>>>> arrayList4DBoxen = new ArrayList<ArrayList<ArrayList<ArrayList<HE_Mesh>>>>();
+  ArrayList<Box> boxen = new ArrayList<Box>();
 
-//ArrayList<HE_Mesh> arrayList1DBoxen = new ArrayList<HE_Mesh>();
-//ArrayList<ArrayList<HE_Mesh>> arrayList2DBoxen = new ArrayList<ArrayList<HE_Mesh>>();
-//ArrayList<ArrayList<ArrayList<HE_Mesh>>> arrayList3DBoxen = new ArrayList<ArrayList<ArrayList<HE_Mesh>>>();
-//ArrayList<ArrayList<ArrayList<ArrayList<HE_Mesh>>>> arrayList4DBoxen = new ArrayList<ArrayList<ArrayList<ArrayList<HE_Mesh>>>>();
-ArrayList<Box> boxen = new ArrayList<Box>();
+  HEC_Box boxCreator;
+  HE_Selection selection;
+  WB_SelectRender3D selrender;
+  WB_Render3D render;
+  WB_AABBTree tree;
 
-HEC_Box boxCreator;
-HE_Selection selection;
-WB_SelectRender3D selrender;
-WB_Render3D render;
-WB_AABBTree tree;
-
-public class Boxen {
   public Boxen(PApplet applet) {
     //xN = arrayList1DBoxen.size();
     //yN = arrayList2DBoxen.get(0).size();
@@ -35,8 +29,11 @@ public class Boxen {
     resizeBoxenArray(xN, yN, zN, tN);
   }
 
-  private void resizeBoxenArray(int xL, int yL, int zL, int tL) {
-    println("resizeBoxenArray called");
+  private void resizeBoxenArray(int xD, int yD, int zD, int tD) {
+    xN = xD;
+    yN = yD;
+    zN = zD;
+    tN = tD;
     boxen = new ArrayList<Box>();
     switch(mode) {
     case 1:

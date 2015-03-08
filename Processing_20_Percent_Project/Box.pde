@@ -47,7 +47,7 @@ public class Box {
     return zN;
   }
   
-  public int gettLocation() {
+  public int getTLocation() {
     return tN;
   }
 
