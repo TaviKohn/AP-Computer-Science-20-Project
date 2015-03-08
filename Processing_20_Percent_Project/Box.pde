@@ -8,11 +8,13 @@ public class Box {
   private int xN;
   private int yN;
   private int zN;
+  private int tN;
 
-  public Box(int xN, int yN, int zN) {
+  public Box(int xN, int yN, int zN, int tN) {
     this.xN = xN;
     this.yN = yN;
     this.zN = zN;
+    this.tN = tN;
     box = boxCreatorFactory(xN, yN, zN);
     mesh=new HE_Mesh(box);
   }
@@ -31,6 +33,22 @@ public class Box {
 
   public void setStringValue(String value) {
     stringValue = value;
+  }
+  
+  public int getXLocation() {
+    return xN;
+  }
+  
+  public int getYLocation() {
+    return yN;
+  }
+  
+  public int getZLocation() {
+    return zN;
+  }
+  
+  public int gettLocation() {
+    return tN;
   }
 
   public boolean getBooleanValue() {

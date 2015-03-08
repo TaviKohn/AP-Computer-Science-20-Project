@@ -18,14 +18,14 @@ public class GUI {
   private Numberbox arraySizeZNumberbox;
   private Numberbox arraySizeTNumberbox;
   private Textlabel arraySizeLabel;
-  private int mode = 1;
+  private int mode = 3;
+  private boolean arraySizeUpdate = false;
   private Tab arrayTab1D;
   private Tab arrayTab2D;
   private Tab arrayTab3D;
   private Tab arrayTab4D;
   private color background = #888888;
   private color groupBackground = #AAAAAA;
-  private int drawCount = 0;
 
   private int tabWidth = displayWidth / 4;
   private int tabHeight = 2 * fontHeight;
@@ -134,6 +134,7 @@ public class GUI {
     arraySizeXNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeXNumberbox.setCaptionLabel("Array Size X");
     arraySizeXNumberbox.setRange(0, 10);
+    arraySizeXNumberbox.setValue(5);
     arraySizeXNumberbox.setGroup(settings1D);
 
     arrayTypeDropdownLabel = cp5.addTextlabel("arrayTypeDropdownLabel");
@@ -167,6 +168,7 @@ public class GUI {
     arraySizeYNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeYNumberbox.setCaptionLabel("Array Size Y");
     arraySizeYNumberbox.setRange(0, 10);
+    arraySizeYNumberbox.setValue(5);
     arraySizeYNumberbox.setGroup(settings2D);
 
     arraySizeZNumberbox = cp5.addNumberbox("arraySizeZNumberbox");
@@ -174,6 +176,7 @@ public class GUI {
     arraySizeZNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeZNumberbox.setCaptionLabel("Array Size Z");
     arraySizeZNumberbox.setRange(0, 10);
+    arraySizeZNumberbox.setValue(5);
     arraySizeZNumberbox.setGroup(settings3D);
 
     arraySizeTNumberbox = cp5.addNumberbox("arraySizeTNumberbox");
@@ -181,6 +184,7 @@ public class GUI {
     arraySizeTNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeTNumberbox.setCaptionLabel("Array Size T");
     arraySizeTNumberbox.setRange(0, 10);
+    arraySizeTNumberbox.setValue(5);
     arraySizeTNumberbox.setGroup(settings4D);
 
     settings1D.moveTo(arrayTab1D);
@@ -208,24 +212,20 @@ public class GUI {
     settings4D.moveTo(arrayTab4D);
   }
 
+  public void getSizeX() {
+  }
+
+  public void getSizeY() {
+  }
+
+  public void getSizeZ() {
+  }
+
+  public void getSizeT() {
+  }
+
   public int getMode() {
     return mode;
-  }
-
-  public int getXL() {
-    return 5;
-  }
-
-  public int getYL() {
-    return 5;
-  }
-
-  public int getZL() {
-    return 5;
-  }
-
-  public int getTL() {
-    return 5;
   }
 
   public void setMode(int mode) {
@@ -241,18 +241,15 @@ public class GUI {
   }
 
   public void draw() {
-    if (millis() - drawCount > 10) {
-      hint(DISABLE_DEPTH_TEST); 
-      cam.beginHUD();
-      cp5.draw();
-      cam.endHUD(); 
-      hint(ENABLE_DEPTH_TEST);
-      drawCount = 0;
-    } else {
-      drawCount++;
-    }
+    arraySizeUpdate = false;
+    hint(DISABLE_DEPTH_TEST); 
+    cam.beginHUD();
+    cp5.draw();
+    cam.endHUD(); 
+    hint(ENABLE_DEPTH_TEST);
   }
-
-  public void getRender() {
+  
+  public boolean arraySizeUpdate() {
+    return arraySizeUpdate;
   }
 }

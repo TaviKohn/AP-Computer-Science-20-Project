@@ -12,10 +12,10 @@ Boxen cubes;
 
 PeasyCam cam;
 
-int xL = 0;
-int yL = 0;
-int zL = 0;
-int tL = 0;
+int xL = 4;
+int yL = 4;
+int zL = 4;
+int tL = 4;
 int mode = 3;
 
 ArrayList<Object> arrayList1D = new ArrayList<Object>();
@@ -27,15 +27,21 @@ ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<A
 void setup() {
   size(displayWidth, displayHeight, P3D);
   initLists();
-  xL = arrayList1D.size();
-  yL = arrayList2D.get(0).size();
-  zL = arrayList3D.get(0).get(0).size();
+  //xL = arrayList1D.size();
+  //yL = arrayList2D.get(0).size();
+  //zL = arrayList3D.get(0).get(0).size();
+  int timeMarker = millis();
+  println("Initializing Camera");
   cam = new PeasyCam(this, 100);
+  println("Finished :\t" + (millis() - timeMarker) / 1000  + "s");
+  println("Initializing GUI");
   gui = new GUI(new ControlP5(this), cam);
+  println("Finished :\t" + (millis() - timeMarker) / 1000  + "s");
+  println("Initializing Boxen");
   cubes = new Boxen(this);
-  frameRate(20);
-  noSmooth();
-  cubes.resizeBoxenArray(5, 5, 5, 5);
+  println("Finished :\t" + (millis() - timeMarker) / 1000  + "s");
+  frameRate(30);
+  smooth(0);
 }
 
 void draw() {
@@ -61,9 +67,9 @@ void draw() {
     //4D Array?
     break;
   }
+  mode = gui.getMode();
   cubes.draw();
   gui.draw();
-  mode = gui.getMode();
 }
 
 void initLists() {
@@ -89,4 +95,41 @@ void controlEvent(ControlEvent event) {
 
 void mouseClicked() {
   cubes.mouseClicked();
+}
+
+void arraySizeXNumberbox(int value) {
+  println("arraySizeXNumberbox Updated to :\t" + value);
+  hint(DISABLE_DEPTH_TEST); 
+  cam.beginHUD();
+  xL = value;
+  cubes.resizeBoxenArray(xL, yL, zL, tL);
+  cam.endHUD(); 
+  hint(ENABLE_DEPTH_TEST);
+}
+
+void arraySizeYNumberbox(int value) {
+  println("arraySizeTNumberbox Updated to :\t" + value);
+  hint(DISABLE_DEPTH_TEST); 
+  cam.beginHUD();
+  yL = value;
+  cubes.resizeBoxenArray(xL, yL, zL, tL);
+  println("arraySizeYNumberbox Updated to :\t" + value);
+  cam.endHUD(); 
+  hint(ENABLE_DEPTH_TEST);
+}
+
+void arraySizeZNumberbox(int value) {
+  println("arraySizeZNumberbox Updated to :\t" + value);
+  hint(DISABLE_DEPTH_TEST); 
+  cam.beginHUD();
+  zL = value;
+  cubes.resizeBoxenArray(xL, yL, zL, tL);
+  cam.endHUD(); 
+  hint(ENABLE_DEPTH_TEST);
+}
+
+void arraySizeTNumberbox(int value) {
+  println("arraySizeTNumberbox Updated to :\t" + value);
+  tL = value;
+  cubes.resizeBoxenArray(xL, yL, zL, tL);
 }
