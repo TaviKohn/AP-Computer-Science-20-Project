@@ -84,6 +84,7 @@ public class GUI {
   public GUI(ControlP5 cp5, PeasyCam cam) {
     this.cp5 = cp5;
     this.cam = cam;
+    cursor(CROSS);
     cam.setMinimumDistance(100);
     cam.setMaximumDistance(1000);
     stroke(#FFFFFF);
@@ -131,7 +132,7 @@ public class GUI {
     arraySizeXNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeXNumberbox.setCaptionLabel("Array Size X");
     arraySizeXNumberbox.setRange(1, 10);
-    arraySizeXNumberbox.setValue(5);
+    arraySizeXNumberbox.setValue(1);
     arraySizeXNumberbox.setGroup(settings1D);
 
     arrayTypeDropdownLabel = cp5.addTextlabel("arrayTypeDropdownLabel");
@@ -165,7 +166,7 @@ public class GUI {
     arraySizeYNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeYNumberbox.setCaptionLabel("Array Size Y");
     arraySizeYNumberbox.setRange(1, 10);
-    arraySizeYNumberbox.setValue(5);
+    arraySizeYNumberbox.setValue(1);
     arraySizeYNumberbox.setGroup(settings2D);
 
     arraySizeZNumberbox = cp5.addNumberbox("arraySizeZNumberbox");
@@ -173,7 +174,7 @@ public class GUI {
     arraySizeZNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeZNumberbox.setCaptionLabel("Array Size Z");
     arraySizeZNumberbox.setRange(1, 10);
-    arraySizeZNumberbox.setValue(5);
+    arraySizeZNumberbox.setValue(1);
     arraySizeZNumberbox.setGroup(settings3D);
 
     arraySizeTNumberbox = cp5.addNumberbox("arraySizeTNumberbox");
@@ -181,14 +182,14 @@ public class GUI {
     arraySizeTNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeTNumberbox.setCaptionLabel("Array Size T");
     arraySizeTNumberbox.setRange(1, 10);
-    arraySizeTNumberbox.setValue(5);
+    arraySizeTNumberbox.setValue(1);
     arraySizeTNumberbox.setGroup(settings4D);
 
-    settings1D.moveTo(arrayTab1D);
-    settings2D.moveTo(arrayTab2D);
-    settings3D.moveTo(arrayTab3D);
-    settings4D.moveTo(arrayTab4D);
-    settings1D.moveTo(arrayTab1D);
+    //settings1D.moveTo(arrayTab1D);
+    //settings2D.moveTo(arrayTab2D);
+    //settings3D.moveTo(arrayTab3D);
+    //settings4D.moveTo(arrayTab4D);
+    //settings1D.moveTo(arrayTab1D);
 
     cp5.setAutoDraw(false);
   }
@@ -219,10 +220,6 @@ public class GUI {
   }
 
   public void getSizeT() {
-  }
-
-  public int getMode() {
-    return mode;
   }
 
   public void setMode(int mode) {

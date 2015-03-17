@@ -1,11 +1,17 @@
+import controlP5.*;
+/*
 import wblut.hemesh.*;
 import wblut.geom.*;
 import wblut.math.*;
 import wblut.processing.*;
 import wblut.core.*;
+*/
+import shapes3d.*;
+import shapes3d.utils.*;
+import shapes3d.animation.*;
 
-import controlP5.*;
 import peasy.*;
+PApplet applet;
 
 GUI gui;
 Boxen cubes;
@@ -17,6 +23,7 @@ int yL = 4;
 int zL = 4;
 int tL = 4;
 int mode = 3;
+int dataMode = 0;
 
 ArrayList<Object> arrayList1D = new ArrayList<Object>();
 ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
@@ -26,6 +33,7 @@ ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<A
 
 void setup() {
   size(displayWidth, displayHeight, P3D);
+  applet = this;
   initLists();
   //xL = arrayList1D.size();
   //yL = arrayList2D.get(0).size();
@@ -38,7 +46,7 @@ void setup() {
   gui = new GUI(new ControlP5(this), cam);
   println("Finished :\t" + (double)(millis() - timeMarker) / 1000  + "s");
   println("Initializing Boxen");
-  cubes = new Boxen(this);
+  cubes = new Boxen();
   println("Finished :\t" + (double)(millis() - timeMarker) / 1000  + "s");
   frameRate(30);
   smooth(8);
@@ -50,7 +58,7 @@ void draw() {
   //yL = arrayList2D.get(0).size();
   //zL = arrayList3D.get(0).get(0).size();
   background(gui.getBackgroundColor());
-  switch(gui.getMode()) {
+  switch(mode) {
   case 1:
     gui.activateArrayTab1D();
     //1D Array
@@ -68,8 +76,9 @@ void draw() {
     //4D Array?
     break;
   }
-  mode = gui.getMode();
+  pushMatrix();
   cubes.draw();
+  popMatrix();
   gui.draw();
 }
 
@@ -90,7 +99,7 @@ void initLists() {
 void controlEvent(ControlEvent event) {
   if (event.isTab()) {
     cam.reset();
-    gui.setMode(event.getTab().getId());
+    mode = event.getTab().getId();
     println("TabEvent Happened\t" + event.getTab().getId());
   }
 }

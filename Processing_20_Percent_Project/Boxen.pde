@@ -1,8 +1,8 @@
 public class Boxen { //<>//
-  int xN = 5;
-  int yN = 5;
-  int zN = 5;
-  int tN = 5;
+  int xN = 1;
+  int yN = 1;
+  int zN = 1;
+  int tN = 1;
 
   int selectedBox;
 
@@ -10,23 +10,23 @@ public class Boxen { //<>//
   //ArrayList<ArrayList<HE_Mesh>> arrayList2DBoxen = new ArrayList<ArrayList<HE_Mesh>>();
   //ArrayList<ArrayList<ArrayList<HE_Mesh>>> arrayList3DBoxen = new ArrayList<ArrayList<ArrayList<HE_Mesh>>>();
   //ArrayList<ArrayList<ArrayList<ArrayList<HE_Mesh>>>> arrayList4DBoxen = new ArrayList<ArrayList<ArrayList<ArrayList<HE_Mesh>>>>();
-  ArrayList<Box> boxen = new ArrayList<Box>();
+  ArrayList<Voxel> boxen = new ArrayList<Voxel>();
 
-  HEC_Box boxCreator;
-  HE_Selection selection;
-  WB_SelectRender3D selrender;
-  WB_Render3D render;
-  WB_AABBTree tree;
+  //HEC_Box boxCreator;
+  //HE_Selection selection;
+  //WB_SelectRender3D selrender;
+  //WB_Render3D render;
+  //WB_AABBTree tree;
 
-  public Boxen(PApplet applet) {
+  public Boxen() {
     //xN = arrayList1DBoxen.size();
     //yN = arrayList2DBoxen.get(0).size();
     //zN = arrayList3DBoxen.get(0).get(0).size();
     //Box box = new Box(0, 0, 0, 0);
     //tree = new WB_AABBTree(box.getMesh(), 4);
-    //selection = new HE_Selection(box.getMesh());
-    render = new WB_Render3D(applet);
-    resizeBoxenArray(xN, yN, zN, tN);
+    //render = new WB_Render3D(applet);
+    //selrender=new WB_SelectRender3D(applet);
+    //resizeBoxenArray(xN, yN, zN, tN);
   }
 
   private void resizeBoxenArray(int xD, int yD, int zD, int tD) {
@@ -34,12 +34,12 @@ public class Boxen { //<>//
     yN = yD;
     zN = zD;
     tN = tD;
-    boxen = new ArrayList<Box>();
+    boxen = new ArrayList<Voxel>();
     switch(mode) {
     case 1:
       for (int ix = 0; ix < xN; ix++) {
-        //println("Initializing a Box in a 1D Array");
-        boxen.add(new Box(ix * 50 - (xN - 1) * 25, 0, 0, 0));
+        println("Initializing a Box in a 1D Array");
+        boxen.add(new Voxel(ix * 50 - (xN - 1) * 25, 0, 0, 0));
       }
       cam.setMinimumDistance(50 * xN);
       cam.setMaximumDistance(150 * xN);
@@ -47,8 +47,8 @@ public class Boxen { //<>//
     case 2:
       for (int ix = 0; ix < xN; ix++) {
         for (int iy = 0; iy < yN; iy++) {
-          //println("Initializing a Box in a 2D Array");
-          boxen.add(new Box(ix * 50 - (xN - 1) * 25, iy * 50 - (yN - 1) * 25, 0, 0));
+          println("Initializing a Box in a 2D Array");
+          boxen.add(new Voxel(ix * 50 - (xN - 1) * 25, iy * 50 - (yN - 1) * 25, 0, 0));
         }
       }
       if (xN >= yN) {
@@ -63,8 +63,8 @@ public class Boxen { //<>//
       for (int ix = 0; ix < xN; ix++) {
         for (int iy = 0; iy < yN; iy++) {
           for (int iz = 0; iz < zN; iz++) {
-            //println("Initializing a Box in a 3D Array");
-            boxen.add(new Box(ix * 100 - (xN - 1) * 50, iy * 100 - (yN - 1) * 50, iz * 100 - (zN - 1) * 50, 0));
+            println("Initializing a Box in a 3D Array");
+            boxen.add(new Voxel(ix * 100 - (xN - 1) * 50, iy * 100 - (yN - 1) * 50, iz * 100 - (zN - 1) * 50, 0));
           }
         }
       }
@@ -84,8 +84,8 @@ public class Boxen { //<>//
         for (int iy = 0; iy < yN; iy++) {
           for (int iz = 0; iy < zN; iz++) {
             for (int it = 0; it < tN; it++) {
-              //println("Initializing a Box in a 4D Array");
-              boxen.add(new Box(ix * 100 - (xN - 1) * 50, iy * 100 - (yN - 1) * 50, iz * 100 - (zN - 1) * 50, it * 100 - (tN - 1) * 50));
+              println("Initializing a Box in a 4D Array");
+              boxen.add(new Voxel(ix * 100 - (xN - 1) * 50, iy * 100 - (yN - 1) * 50, iz * 100 - (zN - 1) * 50, it * 100 - (tN - 1) * 50));
             }
           }
         }
@@ -108,25 +108,41 @@ public class Boxen { //<>//
   }
 
   public void mouseClicked() {
-    HE_Face f;
-    for (Box boxi : boxen) {
-      tree = new WB_AABBTree(boxi.getMesh(), 1);
-      selection = new HE_Selection(boxi.getMesh());
-      f = render.pickClosestFace(boxi.getMesh(), mouseX, mouseY);
-      if (f != null) {
-        boxi.setBooleanValue(!boxi.getBooleanValue());
+    //HE_Face f;
+    switch(dataMode) {
+    case 0:  //boolean
+      /*
+      for (int i = 0; i < boxen.size (); i++) {
+       tree = new WB_AABBTree(boxen.get(i).getMesh(), 1);
+       f = render.pickClosestFace(boxen.get(i).getMesh(), mouseX, mouseY);
+       if (f != null) {
+       boxen.get(i).setBooleanValue(!boxen.get(i).getBooleanValue());
+       }
+       }
+       */
+      Shape3D picked = Shape3D.pickShape(applet, mouseX, mouseY);
+      if (picked != null) {
+        for(Voxel boxi : boxen) {
+          if(picked == boxi.getBox()) boxi.booleanValue = !boxi.getBooleanValue();
+        }
       }
+      break;
+    case 1:  //int
+      break;
+    case 2:  //double
+      break;
+    case 3:  //string
+      break;
     }
   }
 
   public void draw() {
-    for (Box boxi : boxen) {
-      fill(100);
-      if (boxi.getBooleanValue()) fill(255);
-      noStroke();
-      render.drawFaces(boxi.getMesh());
-      stroke(0);
-      render.drawEdges(boxi.getMesh());
+    for (Voxel boxi : boxen) {
+      boxi.draw();
+      //noStroke();
+      //render.drawFaces(boxi.getMesh());
+      //stroke(0);
+      //render.drawEdges(boxi.getMesh());
     }
   }
 }
