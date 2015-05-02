@@ -15,7 +15,6 @@ public class GUI {
   private Numberbox arraySizeZNumberbox;
   private Numberbox arraySizeTNumberbox;
   private Textlabel arraySizeLabel;
-  private int mode = 3;
   private boolean arraySizeUpdate = false;
   private Tab arrayTab1D;
   private Tab arrayTab2D;
@@ -185,11 +184,11 @@ public class GUI {
     arraySizeTNumberbox.setValue(1);
     arraySizeTNumberbox.setGroup(settings4D);
 
-    //settings1D.moveTo(arrayTab1D);
-    //settings2D.moveTo(arrayTab2D);
-    //settings3D.moveTo(arrayTab3D);
-    //settings4D.moveTo(arrayTab4D);
-    //settings1D.moveTo(arrayTab1D);
+    settings1D.moveTo(arrayTab1D);
+    settings2D.moveTo(arrayTab2D);
+    settings3D.moveTo(arrayTab3D);
+    settings4D.moveTo(arrayTab4D);
+    settings1D.moveTo(arrayTab1D);
 
     cp5.setAutoDraw(false);
   }
@@ -220,10 +219,6 @@ public class GUI {
   }
 
   public void getSizeT() {
-  }
-
-  public void setMode(int mode) {
-    this.mode = mode;
   }
 
   public PeasyCam getCam() {

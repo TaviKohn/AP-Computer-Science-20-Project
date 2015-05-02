@@ -1,11 +1,21 @@
 import controlP5.*;
 /*
 import wblut.hemesh.*;
-import wblut.geom.*;
-import wblut.math.*;
-import wblut.processing.*;
-import wblut.core.*;
-*/
+ import wblut.geom.*;
+ import wblut.math.*;
+ import wblut.processing.*;
+ import wblut.core.*;
+ */
+/*TODO
+ *Make render boolean in voxels that is set by the boxen class when the sliders are moved
+ *Each box will be rendered according to the boolean as opposed to removed from the ArrayList of voxels
+ *
+ *Make a popup box for modifying values in voxels
+ *
+ *Fix hidden single box at start of program
+ *
+ *Fix messed up selection
+ */
 import shapes3d.*;
 import shapes3d.utils.*;
 import shapes3d.animation.*;
@@ -18,17 +28,20 @@ Boxen cubes;
 
 PeasyCam cam;
 
-int xL = 4;
-int yL = 4;
-int zL = 4;
-int tL = 4;
-int mode = 3;
+int debugCounter;
+
+int xL = 1;
+int yL = 1;
+int zL = 1;
+int tL = 1;
+final int maxSizeX = 10;
+final int maxSizeY = 10;
+final int maxSizeZ = 10;
+final int maxSizeT = 1;
+int mode = 4;
 int dataMode = 0;
 
-ArrayList<Object> arrayList1D = new ArrayList<Object>();
-ArrayList<ArrayList<Object>> arrayList2D = new ArrayList<ArrayList<Object>>();
-ArrayList<ArrayList<ArrayList<Object>>> arrayList3D = new ArrayList<ArrayList<ArrayList<Object>>>();
-ArrayList<ArrayList<ArrayList<ArrayList<Object>>>> arrayList4D = new ArrayList<ArrayList<ArrayList<ArrayList<Object>>>>();
+ArrayList<ArrayList<ArrayList<ArrayList<Voxel>>>> multiDimensionalArrayList = new ArrayList<ArrayList<ArrayList<ArrayList<Voxel>>>>();
 
 
 void setup() {
@@ -48,15 +61,27 @@ void setup() {
   println("Initializing Boxen");
   cubes = new Boxen();
   println("Finished :\t" + (double)(millis() - timeMarker) / 1000  + "s");
-  frameRate(30);
-  smooth(8);
-  lights();
+  println("Initializing lists");
+  initLists();
+  println("Finished :\t" + (double)(millis() - timeMarker) / 1000  + "s");
+  println("Setting up 3D Applet Framerate, Antialiasing and Lights");
+  frameRate(25);
+  smooth(4);
+  //noSmooth();
+  //lights();
+  println("Finished :\t" + (double)(millis() - timeMarker) / 1000  + "s");
+  /*
+  println("Resizing Array to 1, 1, 1, 1");
+  cubes.resizeBoxenArray(1, 1, 1, 1);
+  println("Finished :\t" + (double)(millis() - timeMarker) / 1000  + "s");
+  */
 }
 
 void draw() {
   //xL = arrayList1D.size();
   //yL = arrayList2D.get(0).size();
   //zL = arrayList3D.get(0).get(0).size();
+  //mode = 4 - mode;
   background(gui.getBackgroundColor());
   switch(mode) {
   case 1:
@@ -77,23 +102,68 @@ void draw() {
     break;
   }
   pushMatrix();
+  println("Drawing boxen");
   cubes.draw();
+  println("Number of boxes in multiDimensionalArrayList:" + multiDimensionalArrayList.size() * multiDimensionalArrayList.get(0).size() * multiDimensionalArrayList.get(0).get(0).size() * multiDimensionalArrayList.get(0).get(0).get(0).size());
   popMatrix();
+  println("Drawing GUI");
   gui.draw();
 }
 
 void initLists() {
-  ArrayList<Object> temp1DArrayList = new ArrayList<Object>();
-  ArrayList<ArrayList<Object>> temp2DArrayList = new ArrayList<ArrayList<Object>>();
-  ArrayList<ArrayList<ArrayList<Object>>> temp3DArrayList = new ArrayList<ArrayList<ArrayList<Object>>>();
+  ArrayList<Voxel> temp1DArrayList = new ArrayList<Voxel>();
+  ArrayList<ArrayList<Voxel>> temp2DArrayList = new ArrayList<ArrayList<Voxel>>();
+  ArrayList<ArrayList<ArrayList<Voxel>>> temp3DArrayList = new ArrayList<ArrayList<ArrayList<Voxel>>>();
+  for (int it = 0; it < maxSizeT; it++) {
+  temp1DArrayList.add(new Voxel(0, 0, 0, 0));
+  }
+  
+  for (int iz = 0; iz < maxSizeZ; iz++) {
   temp2DArrayList.add(temp1DArrayList);
+  }
+  
+  for (int iy = 0; iy < maxSizeY; iy++) {
   temp3DArrayList.add(temp2DArrayList);
-  arrayList2D.add(temp1DArrayList);
-  arrayList3D.add(temp2DArrayList);
-  arrayList4D.add(temp3DArrayList);
+  }
+  
+  for (int ix = 0; ix < maxSizeX; ix++) {
+  multiDimensionalArrayList.add(temp3DArrayList);
+  }
+  /*
+  for (int ix = 0; ix < maxSizeX; ix++) {
+    temp2DArrayList.add(temp1DArrayList);
+  }
+  for (int ix = 0; ix < maxSizeX; ix++) {
+    for (int iy = 0; iy < maxSizeY; iy++) {
+      temp3DArrayList.add(temp2DArrayList);
+    }
+  }
+  for (int ix = 0; ix < maxSizeX; ix++) {
+    for (int iy = 0; iy < maxSizeY; iy++) {
+      for (int iz = 0; iz < maxSizeZ; iz++) {
+        multiDimensionalArrayList.add(temp3DArrayList);
+      }
+    }
+  }
+  */
+/*
+for (int ix = 0; ix < maxSizeX; ix++) {
+    for (int iy = 0; iy < maxSizeY; iy++) {
+      for (int iz = 0; iz < maxSizeZ; iz++) {
+        for (int it = 0; it < maxSizeT; it++) {
+          multiDimensionalArrayList.get(iy).get(iz).get(it).add(new Voxel(ix * 100 - (maxSizeX - 1) * 50, iy * 100 - (maxSizeY - 1) * 50, iz * 100 - (maxSizeZ - 1) * 50, it * 100 - (maxSizeT - 1) * 50));
+        }
+      }
+    }
+  }
+  */
   temp1DArrayList = null;
   temp2DArrayList = null;
   temp3DArrayList = null;
+  println("X size: " + multiDimensionalArrayList.size());
+  println("Y size: " + multiDimensionalArrayList.get(0).size());
+  println("Z size: " + multiDimensionalArrayList.get(0).get(0).size());
+  println("T size: " + multiDimensionalArrayList.get(0).get(0).get(0).size());
 }
 
 void controlEvent(ControlEvent event) {
