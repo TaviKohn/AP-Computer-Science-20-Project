@@ -7,14 +7,10 @@ import wblut.hemesh.*;
  import wblut.core.*;
  */
 /*TODO
- *Make render boolean in voxels that is set by the boxen class when the sliders are moved
- *Each box will be rendered according to the boolean as opposed to removed from the ArrayList of voxels
  *
  *Make a popup box for modifying values in voxels
  *
- *Fix hidden single box at start of program
- *
- *Fix messed up selection
+ *Fix broken box storage management
  */
 import shapes3d.*;
 import shapes3d.utils.*;
