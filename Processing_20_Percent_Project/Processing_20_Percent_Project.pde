@@ -22,7 +22,7 @@ int xL = 4;
 int yL = 4;
 int zL = 4;
 int tL = 4;
-int mode = 3;
+int mode = 4;
 int dataMode = 0;
 
 ArrayList<Object> arrayList1D = new ArrayList<Object>();
