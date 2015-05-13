@@ -2,7 +2,7 @@ public class Voxel {
   //private HEC_Box box;
   //private HE_Mesh mesh;
   private Box box;
-  public boolean render = true;
+  public boolean render = false;
   private boolean booleanValue;
   private int intValue;
   private double doubleValue;

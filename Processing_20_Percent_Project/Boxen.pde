@@ -26,15 +26,27 @@ public class Boxen {
     //tree = new WB_AABBTree(box.getMesh(), 4);
     //render = new WB_Render3D(applet);
     //selrender=new WB_SelectRender3D(applet);
-    resizeBoxenArray(1, 1, 1, 1);
+    //resizeBoxenArray(1, 1, 1, 1);
   }
 
   private void resizeBoxenArray(int xD, int yD, int zD, int tD) {
     println("Beginning resizeBoxenArray()");
-    xN = xD;
-    yN = yD;
-    zN = zD;
-    tN = tD;
+    xN = xD - 1;
+    yN = yD - 1;
+    zN = zD - 1;
+    tN = tD - 1;
+
+    for (int ix = 0; ix < multiDimensionalArrayList.size () && ix < xL; ix++) {
+      for (int iy = 0; iy < multiDimensionalArrayList.get (ix).size() && iy < yL; iy++) {
+        for (int iz = 0; iz < multiDimensionalArrayList.get (ix).get(iy).size() && iz < zL; iz++) {
+          for (int it = 0; it < multiDimensionalArrayList.get (ix).get(iy).get(iz).size() && it < tL; it++) {
+            multiDimensionalArrayList.get(ix).get(iy).get(iz).get(it).setRender(false);
+          }
+        }
+      }
+    }
+    //while(multiDimensionalArrayList.size()< xD) multiDimensionalArray.add(new ArrayList<ArrayList<ArrayList<Voxel>>>(0, 0, 0, 0));
+
     //boxen = new ArrayList<Voxel>();
     switch(mode) {
     case 1:
@@ -89,8 +101,6 @@ public class Boxen {
                 print("Initializing a Box in a 4D Array for the " + ++debugCounter + "th time\t ix = " + ix + "\tiy = " + iy + "\tiz = " + iz + "\tit = " + it);
                 //boxen.add(new Voxel(ix * 100 - (xN - 1) * 50, iy * 100 - (yN - 1) * 50, iz * 100 - (zN - 1) * 50, it * 100 - (tN - 1) * 50));
                 multiDimensionalArrayList.get(ix).get(iy).get(iz).get(it).setRender(true);
-                if(multiDimensionalArrayList.get(ix).get(iy).get(iz).get(it).render) println("\t Render variable has value of true");
-                else println("\t Render variable has value of false");
               }
             }
           }
@@ -101,16 +111,16 @@ public class Boxen {
       }
       if (xN >= yN && xN >= zN && xN >= tN) {
         cam.setMinimumDistance(150 * xN);
-        cam.setMaximumDistance(500 * xN);
+        //cam.setMaximumDistance(500 * xN);
       } else if (yN >= zN && yN >= zN && yN >= tN) {
         cam.setMinimumDistance(150 * yN);
-        cam.setMaximumDistance(500 * yN);
+        //cam.setMaximumDistance(500 * yN);
       } else if (zN >= xN && zN >= yN && zN >= tN) {
         cam.setMinimumDistance(150 * zN);
-        cam.setMaximumDistance(500 * zN);
+        //cam.setMaximumDistance(500 * zN);
       } else if (tN >= xN && tN >= yN && tN >= zN) {
         cam.setMinimumDistance(150 * tN);
-        cam.setMaximumDistance(500 * tN);
+        //cam.setMaximumDistance(500 * tN);
       }
       break;
     default:
