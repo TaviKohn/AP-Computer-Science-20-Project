@@ -15,6 +15,7 @@ public class GUI {
   private Numberbox arraySizeZNumberbox;
   private Numberbox arraySizeTNumberbox;
   private Textlabel arraySizeLabel;
+  private int mode = 3;
   private boolean arraySizeUpdate = false;
   private Tab arrayTab1D;
   private Tab arrayTab2D;
@@ -130,7 +131,7 @@ public class GUI {
     arraySizeXNumberbox.setPosition(arraySizeXNumberboxX, arraySizeXNumberboxY);
     arraySizeXNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeXNumberbox.setCaptionLabel("Array Size X");
-    arraySizeXNumberbox.setRange(1, maxSizeX);
+    arraySizeXNumberbox.setRange(1, 10);
     arraySizeXNumberbox.setValue(1);
     arraySizeXNumberbox.setGroup(settings1D);
 
@@ -164,7 +165,7 @@ public class GUI {
     arraySizeYNumberbox.setPosition(arraySizeYNumberboxX, arraySizeYNumberboxY);
     arraySizeYNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeYNumberbox.setCaptionLabel("Array Size Y");
-    arraySizeYNumberbox.setRange(1, maxSizeY);
+    arraySizeYNumberbox.setRange(1, 10);
     arraySizeYNumberbox.setValue(1);
     arraySizeYNumberbox.setGroup(settings2D);
 
@@ -172,7 +173,7 @@ public class GUI {
     arraySizeZNumberbox.setPosition(arraySizeZNumberboxX, arraySizeZNumberboxY);
     arraySizeZNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeZNumberbox.setCaptionLabel("Array Size Z");
-    arraySizeZNumberbox.setRange(1, maxSizeZ);
+    arraySizeZNumberbox.setRange(1, 10);
     arraySizeZNumberbox.setValue(1);
     arraySizeZNumberbox.setGroup(settings3D);
 
@@ -180,15 +181,15 @@ public class GUI {
     arraySizeTNumberbox.setPosition(arraySizeTNumberboxX, arraySizeTNumberboxY);
     arraySizeTNumberbox.setSize(arraySizeWidth, arraySizeHeight);
     arraySizeTNumberbox.setCaptionLabel("Array Size T");
-    arraySizeTNumberbox.setRange(1, maxSizeT);
+    arraySizeTNumberbox.setRange(1, 10);
     arraySizeTNumberbox.setValue(1);
     arraySizeTNumberbox.setGroup(settings4D);
 
-    settings1D.moveTo(arrayTab1D);
-    settings2D.moveTo(arrayTab2D);
-    settings3D.moveTo(arrayTab3D);
-    settings4D.moveTo(arrayTab4D);
-    settings1D.moveTo(arrayTab1D);
+    //settings1D.moveTo(arrayTab1D);
+    //settings2D.moveTo(arrayTab2D);
+    //settings3D.moveTo(arrayTab3D);
+    //settings4D.moveTo(arrayTab4D);
+    //settings1D.moveTo(arrayTab1D);
 
     cp5.setAutoDraw(false);
   }
@@ -219,6 +220,10 @@ public class GUI {
   }
 
   public void getSizeT() {
+  }
+
+  public void setMode(int mode) {
+    this.mode = mode;
   }
 
   public PeasyCam getCam() {

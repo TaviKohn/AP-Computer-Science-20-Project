@@ -2,7 +2,6 @@ public class Voxel {
   //private HEC_Box box;
   //private HE_Mesh mesh;
   private Box box;
-  public boolean render = false;
   private boolean booleanValue;
   private int intValue;
   private double doubleValue;
@@ -17,7 +16,7 @@ public class Voxel {
     this.yN = yN;
     this.zN = zN;
     this.tN = tN;
-    box = new Box(applet, 30);
+    box = new Box(applet, 40);
     box.drawMode(S3D.SOLID | S3D.WIRE);
     box.fill(0);
     moveTo(xN, yN, zN, tN);
@@ -83,10 +82,6 @@ public class Voxel {
     this.zN = zN;
     this.tN = tN;
     box.moveTo(xN, yN, zN);
-  }
-  
-  public void setRender(boolean render){
-    this.render = render;
   }
 
   public void setTagNo(int number) {
