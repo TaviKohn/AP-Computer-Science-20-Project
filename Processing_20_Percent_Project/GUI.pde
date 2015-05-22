@@ -84,8 +84,8 @@ public class GUI {
     this.cp5 = cp5;
     this.cam = cam;
     cursor(CROSS);
-    cam.setMinimumDistance(100);
-    cam.setMaximumDistance(1000);
+    cam.setMinimumDistance(150 * 5);
+    cam.setMaximumDistance(500 * 5);
     stroke(#FFFFFF);
 
     cp5.getDefaultTab().remove();
@@ -237,7 +237,7 @@ public class GUI {
     cam.endHUD(); 
     hint(ENABLE_DEPTH_TEST);
   }
-  
+
   public boolean arraySizeUpdate() {
     return arraySizeUpdate;
   }

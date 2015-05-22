@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.Arrays; //<>// //<>//
 import controlP5.*;
 /*
 import wblut.hemesh.*;
@@ -31,9 +31,9 @@ int xL = 1;
 int yL = 1;
 int zL = 1;
 int tL = 1;
-final int maxSizeX = 2;
-final int maxSizeY = 2;
-final int maxSizeZ = 2;
+final int maxSizeX = 5;
+final int maxSizeY = 5;
+final int maxSizeZ = 5;
 final int maxSizeT = 1;
 int mode = 4;
 int dataMode = 0;
@@ -61,7 +61,7 @@ void setup() {
   cubes = new Boxen();
   println("Finished :\t" + (double)(millis() - timeMarker) / 1000  + "s");
   println("Setting up 3D Applet Framerate, Antialiasing and Lights");
-  frameRate(5);
+  frameRate(30);
   smooth(4);
   //noSmooth();
   //lights();
@@ -92,64 +92,76 @@ void draw() {
     //4D Array?
     break;
   }
-  println("multiDimensionalArrayList.toString():\t" + multiDimensionalArrayList.toString());
+  //println("multiDimensionalArrayList.toString():\t" + multiDimensionalArrayList.toString());
   pushMatrix();
   println("Drawing boxen");
   cubes.draw();
-  println("Number of boxes in multiDimensionalArrayList:" + multiDimensionalArrayList.size() * multiDimensionalArrayList.get(0).size() * multiDimensionalArrayList.get(0).get(0).size() * multiDimensionalArrayList.get(0).get(0).get(0).size());
+  //println("Number of boxes in multiDimensionalArrayList:" + multiDimensionalArrayList.size() * multiDimensionalArrayList.get(0).size() * multiDimensionalArrayList.get(0).get(0).size() * multiDimensionalArrayList.get(0).get(0).get(0).size());
   popMatrix();
   println("Drawing GUI");
   gui.draw();
 }
 
 void initLists() {
-  ArrayList<Voxel> temp1DArrayList = new ArrayList<Voxel>();
-  ArrayList<ArrayList<Voxel>> temp2DArrayList = new ArrayList<ArrayList<Voxel>>();
-  ArrayList<ArrayList<ArrayList<Voxel>>> temp3DArrayList = new ArrayList<ArrayList<ArrayList<Voxel>>>();
+  xL = maxSizeX;
+  yL = maxSizeY;
+  zL = maxSizeZ;
+  tL = maxSizeT;
 
-  for (int it = 0; it < maxSizeT; it++) {
-    temp1DArrayList.add(new Voxel(0, 0, 0, 0));
-  }
-  for (int iz = 0; iz < maxSizeZ; iz++) {
-    temp2DArrayList.add((ArrayList<Voxel>)temp1DArrayList.clone());
-  }
-
-  for (int iy = 0; iy < maxSizeY; iy++) {
-    temp3DArrayList.add((ArrayList<ArrayList<Voxel>>)temp2DArrayList.clone());
-  }
   for (int ix = 0; ix < maxSizeX; ix++) {
-    multiDimensionalArrayList.add((ArrayList<ArrayList<ArrayList<Voxel>>>)temp3DArrayList.clone());
+    ArrayList<ArrayList<ArrayList<Voxel>>> temp3DArrayList = new ArrayList<ArrayList<ArrayList<Voxel>>>();
+    for (int iy = 0; iy < maxSizeY; iy++) {
+      ArrayList<ArrayList<Voxel>> temp2DArrayList = new ArrayList<ArrayList<Voxel>>();
+      for (int iz = 0; iz < maxSizeZ; iz++) {
+        ArrayList<Voxel> temp1DArrayList = new ArrayList<Voxel>();
+        for (int it = 0; it < maxSizeT; it++) {
+          temp1DArrayList.add(null);
+        }
+        temp2DArrayList.add(temp1DArrayList);
+      }
+      temp3DArrayList.add(temp2DArrayList);
+    }
+    multiDimensionalArrayList.add(temp3DArrayList);
   }
 
   for (int ix = 0; ix < maxSizeX; ix++) {
     for (int iy = 0; iy < maxSizeY; iy++) {
       for (int iz = 0; iz < maxSizeZ; iz++) {
         for (int it = 0; it < maxSizeT; it++) {
-          multiDimensionalArrayList.get(ix).get(iy).get(iz).set(it, new Voxel(ix * 100 - (maxSizeX - 1) * 50, iy * 100 - (maxSizeY - 1) * 50, iz * 100 - (maxSizeZ - 1) * 50, iz * 100 - (maxSizeZ - 1) * 50));
-          //println("Box Created at:\tX: " + (ix * 100 - (maxSizeX - 1) * 50) + "\tY: " + (iy * 100 - (maxSizeY - 1) * 50) + "\tZ: " + (iz * 100 - (maxSizeZ - 1) * 50) + "\tT: " + (iz * 100 - (maxSizeZ - 1) * 50));
-          println("For loop local variables:\tix: " + ix + "\tiy: " + iy + "\tiz: " + iz + "\tit: " + it);
+          int x = (ix * 100) - ((maxSizeX - 1) * 50);
+          int y = (iy * 100) - ((maxSizeY - 1) * 50);
+          int z = (iz * 100) - ((maxSizeZ - 1) * 50);
+          int t = 0;
+          multiDimensionalArrayList.get(ix).get(iy).get(iz).set(it, new Voxel(x, y, z, 0));
           multiDimensionalArrayList.get(ix).get(iy).get(iz).get(it).setRender(true);
+          //println("Box Created at:\tX: " + (ix * 100 - (maxSizeX - 1) * 50) + "\tY: " + (iy * 100 - (maxSizeY - 1) * 50) + "\tZ: " + (iz * 100 - (maxSizeZ - 1) * 50) + "\tT: " + (iz * 100 - (maxSizeZ - 1) * 50));
+          //println("For loop local variables:\tix: " + ix + "\tiy: " + iy + "\tiz: " + iz + "\tit: " + it);
+          //println("Theoretical Box Location:\tX; " + x + "\tY: " + y + "\tZ: " + z + "\tT: " + t);
+          //println("multiDimensionalArrayList.toString():\t" + multiDimensionalArrayList.toString());
+          //println(multiDimensionalArrayList.get(ix).get(iy).get(iz).toString());
         }
       }
     }
   }
 
-  temp1DArrayList = null;
-  temp2DArrayList = null;
-  temp3DArrayList = null;
+  //temp1DArrayList = null;
+  //temp2DArrayList = null;
+  //temp3DArrayList = null;
   println("X size: " + multiDimensionalArrayList.size());
   println("Y size: " + multiDimensionalArrayList.get(0).size());
   println("Z size: " + multiDimensionalArrayList.get(0).get(0).size());
   println("T size: " + multiDimensionalArrayList.get(0).get(0).get(0).size());
 }
 
+/*
 void controlEvent(ControlEvent event) {
-  if (event.isTab()) {
-    cam.reset();
-    mode = event.getTab().getId();
-    println("TabEvent Happened\t" + event.getTab().getId());
-  }
-}
+ if (event.isTab()) {
+ cam.reset();
+ mode = event.getTab().getId();
+ println("TabEvent Happened\t" + event.getTab().getId());
+ }
+ }
+ */
 
 void mouseClicked() {
   cubes.mouseClicked();

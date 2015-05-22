@@ -12,11 +12,11 @@ public class Voxel {
   private int zN;
   private int tN;
 
-  public Voxel(int xN, int yN, int zN, int tN) {
-    this.xN = xN;
-    this.yN = yN;
-    this.zN = zN;
-    this.tN = tN;
+  public Voxel(int x, int y, int z, int t) {
+    xN = x;
+    yN = y;
+    zN = z;
+    tN = t;
     box = new Box(applet, 30);
     box.drawMode(S3D.SOLID | S3D.WIRE);
     box.fill(0);
@@ -77,15 +77,15 @@ public class Voxel {
     return box;
   }
 
-  public void moveTo(int xN, int yN, int zN, int tN) {
-    this.xN = xN;
-    this.yN = yN;
-    this.zN = zN;
-    this.tN = tN;
+  public void moveTo(int x, int y, int z, int t) {
+    xN = x;
+    yN = y;
+    zN = z;
+    tN = t;
     box.moveTo(xN, yN, zN);
   }
-  
-  public void setRender(boolean render){
+
+  public void setRender(boolean render) {
     this.render = render;
   }
 
@@ -101,6 +101,10 @@ public class Voxel {
     if (booleanValue) box.fill(255);
     else box.fill(100);
     box.draw();
+  }
+
+  public String toString() {
+    return "X: " + xN + "  Y: " + yN + "  Z: " + zN + "  T: " + tN + "  Render: " + render;
   }
 
   /*

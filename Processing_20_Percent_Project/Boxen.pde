@@ -36,11 +36,12 @@ public class Boxen {
     zN = zD - 1;
     tN = tD - 1;
 
-    for (int ix = 0; ix < multiDimensionalArrayList.size () && ix < xL; ix++) {
-      for (int iy = 0; iy < multiDimensionalArrayList.get (ix).size() && iy < yL; iy++) {
-        for (int iz = 0; iz < multiDimensionalArrayList.get (ix).get(iy).size() && iz < zL; iz++) {
-          for (int it = 0; it < multiDimensionalArrayList.get (ix).get(iy).get(iz).size() && it < tL; it++) {
+    for (int ix = 0; ix < multiDimensionalArrayList.size () && ix < maxSizeX; ix++) {
+      for (int iy = 0; iy < multiDimensionalArrayList.get (ix).size() && iy < maxSizeY; iy++) {
+        for (int iz = 0; iz < multiDimensionalArrayList.get (ix).get(iy).size() && iz < maxSizeZ; iz++) {
+          for (int it = 0; it < multiDimensionalArrayList.get (ix).get(iy).get(iz).size() && it < maxSizeT; it++) {
             multiDimensionalArrayList.get(ix).get(iy).get(iz).get(it).setRender(false);
+            //multiDimensionalArrayList.get(ix).get(0).get(0).get(0).setRender(true);
           }
         }
       }
@@ -51,8 +52,9 @@ public class Boxen {
     switch(mode) {
     case 1:
       for (int ix = 0; ix < xN; ix++) {
-        println("Initializing a Box in a 1D Array");
+        //println("Initializing a Box in a 1D Array");
         //boxen.add(new Voxel(ix * 50 - (xN - 1) * 25, 0, 0, 0));
+        multiDimensionalArrayList.get(ix).get(0).get(0).get(0).setRender(true);
       }
       cam.setMinimumDistance(50 * xN);
       cam.setMaximumDistance(150 * xN);
@@ -60,8 +62,9 @@ public class Boxen {
     case 2:
       for (int ix = 0; ix < xN; ix++) {
         for (int iy = 0; iy < yN; iy++) {
-          println("Initializing a Box in a 2D Array");
+          //println("Initializing a Box in a 2D Array");
           //boxen.add(new Voxel(ix * 50 - (xN - 1) * 25, iy * 50 - (yN - 1) * 25, 0, 0));
+          multiDimensionalArrayList.get(ix).get(iy).get(0).get(0).setRender(true);
         }
       }
       if (xN >= yN) {
@@ -76,8 +79,9 @@ public class Boxen {
       for (int ix = 0; ix < xN; ix++) {
         for (int iy = 0; iy < yN; iy++) {
           for (int iz = 0; iz < zN; iz++) {
-            println("Initializing a Box in a 3D Array");
+            //println("Initializing a Box in a 3D Array");
             //boxen.add(new Voxel(ix * 150 - (xN - 1) * 75, iy * 150 - (yN - 1) * 75, iz * 150 - (zN - 1) * 75, 0));
+            multiDimensionalArrayList.get(ix).get(iy).get(iz).get(0).setRender(true);
           }
         }
       }
@@ -93,34 +97,37 @@ public class Boxen {
       }
       break;
     case 4:
-      try {
-        for (int ix = 0; ix < multiDimensionalArrayList.size () && ix < xN; ix++) {
-          for (int iy = 0; iy < multiDimensionalArrayList.get (ix).size() && iy < yN; iy++) {
-            for (int iz = 0; iz < multiDimensionalArrayList.get (ix).get(iy).size() && iz < zN; iz++) {
-              for (int it = 0; it < multiDimensionalArrayList.get (ix).get(iy).get(iz).size() && it < tN; it++) {
-                print("Initializing a Box in a 4D Array for the " + ++debugCounter + "th time\t ix = " + ix + "\tiy = " + iy + "\tiz = " + iz + "\tit = " + it);
-                //boxen.add(new Voxel(ix * 100 - (xN - 1) * 50, iy * 100 - (yN - 1) * 50, iz * 100 - (zN - 1) * 50, it * 100 - (tN - 1) * 50));
-                multiDimensionalArrayList.get(ix).get(iy).get(iz).get(it).setRender(true);
-              }
+      //try {
+      for (int ix = 0; ix < multiDimensionalArrayList.size () && ix < xN; ix++) {
+        for (int iy = 0; iy < multiDimensionalArrayList.get (ix).size() && iy < yN; iy++) {
+          for (int iz = 0; iz < multiDimensionalArrayList.get (ix).get(iy).size() && iz < zN; iz++) {
+            for (int it = 0; it < multiDimensionalArrayList.get (ix).get(iy).get(iz).size() && it < tN; it++) {
+              //print("Initializing a Box in a 4D Array for the " + ++debugCounter + "th time\t ix = " + ix + "\tiy = " + iy + "\tiz = " + iz + "\tit = " + it);
+              //boxen.add(new Voxel(ix * 100 - (xN - 1) * 50, iy * 100 - (yN - 1) * 50, iz * 100 - (zN - 1) * 50, it * 100 - (tN - 1) * 50));
+              println("For loop local variables:\tix: " + ix + "\tiy: " + iy + "\tiz: " + iz + "\tit: " + it);
+              multiDimensionalArrayList.get(ix).get(iy).get(iz).get(it).setRender(true);
             }
           }
         }
       }
-      catch(IndexOutOfBoundsException e) {
-        println("IndexOutOfBoundsException in resizeBoxenArray() Caught");
-      }
+      /*
+    }
+       catch(IndexOutOfBoundsException e) {
+       println("IndexOutOfBoundsException in resizeBoxenArray() Caught");
+       }
+       */
       if (xN >= yN && xN >= zN && xN >= tN) {
         cam.setMinimumDistance(150 * xN);
-        //cam.setMaximumDistance(500 * xN);
+        cam.setMaximumDistance(500 * xN);
       } else if (yN >= zN && yN >= zN && yN >= tN) {
         cam.setMinimumDistance(150 * yN);
-        //cam.setMaximumDistance(500 * yN);
+        cam.setMaximumDistance(500 * yN);
       } else if (zN >= xN && zN >= yN && zN >= tN) {
         cam.setMinimumDistance(150 * zN);
-        //cam.setMaximumDistance(500 * zN);
+        cam.setMaximumDistance(500 * zN);
       } else if (tN >= xN && tN >= yN && tN >= zN) {
         cam.setMinimumDistance(150 * tN);
-        //cam.setMaximumDistance(500 * tN);
+        cam.setMaximumDistance(500 * tN);
       }
       break;
     default:
@@ -149,6 +156,7 @@ public class Boxen {
           for (int iy = 0; iy < multiDimensionalArrayList.get (0).size(); iy++) {
             for (int iz = 0; iz < multiDimensionalArrayList.get (0).get(0).size(); iz++) {
               for (int it = 0; it < multiDimensionalArrayList.get (0).get(0).get(0).size(); it++) {
+                println("For loop local variables:\tix: " + ix + "\tiy: " + iy + "\tiz: " + iz + "\tit: " + it);
                 if (picked == multiDimensionalArrayList.get(ix).get(iy).get(iz).get(it).getBox() && multiDimensionalArrayList.get(ix).get(iy).get(iz).get(it).render) multiDimensionalArrayList.get(ix).get(iy).get(iz).get(it).setBooleanValue(!multiDimensionalArrayList.get(ix).get(iy).get(iz).get(it).getBooleanValue());
               }
             }
@@ -178,7 +186,7 @@ public class Boxen {
         }
       }
     }
-    println("cubes draw() called");
+    //println("cubes draw() called");
     //noStroke();
     //render.drawFaces(boxi.getMesh());
     //stroke(0);
